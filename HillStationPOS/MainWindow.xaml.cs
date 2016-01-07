@@ -27,7 +27,7 @@ namespace HillStationPOS
             _model.LoadData();
             _model.OrderItemAdded += OrderItemAdded;
 
-            this.LoadSettings();
+            this.LoadSettings(false);
         }
 
         private void OrderItemAdded(object sender, OrderItemAddedEventArgs e)
@@ -38,7 +38,7 @@ namespace HillStationPOS
 
         private void WindowClosing(object sender, CancelEventArgs e)
         {
-            this.SaveSettings();
+            this.SaveSettings(false);
         }
     }
 }

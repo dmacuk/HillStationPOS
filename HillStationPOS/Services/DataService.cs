@@ -1,16 +1,14 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using HillStationPOS.Interfaces;
 using HillStationPOS.Model.Entities;
-using System.Collections.ObjectModel;
-using System.Linq;
 
 namespace HillStationPOS.Services
 {
+    // ReSharper disable once ClassNeverInstantiated.Global
     internal class DataService : IDataService
     {
-        public static long SetMealIdentifier;
-
         public string GetSetMealIdentifier()
         {
             return "Set Meal";
@@ -20,14 +18,11 @@ namespace HillStationPOS.Services
         {
             return await Task.Factory.StartNew(() =>
             {
-
                 var result = new List<Header>();
                 using (var entities = new HillStationEntities())
                 {
-                    foreach (var header in entities.Headers.OrderBy(h => h.DisplayOrder).ToList())
-                    {
-                        result.Add(new Header(header));
-                    }
+                    result.AddRange(
+                        entities.Headers.OrderBy(h => h.DisplayOrder).ToList().Select(header => new Header(header)));
                 }
                 return result;
             });
