@@ -10,6 +10,7 @@ using GalaSoft.MvvmLight.CommandWpf;
 using HillStationPOS.Interfaces;
 using HillStationPOS.Model;
 using HillStationPOS.Model.Entities;
+using HillStationPOS.Utilities;
 
 namespace HillStationPOS.ViewModel
 {
@@ -70,9 +71,14 @@ namespace HillStationPOS.ViewModel
                     Title = "This is a meal"
                 };
                 Meals.Add(meal);
+                OrderNumber = "A0001";
+                Address = "David McCallum" + Environment.NewLine + "10 Bingham Broadway" + Environment.NewLine +
+                          "EH15 3JL" + Environment.NewLine + "07757 438 032";
             }
             Order.CollectionChanged += UpdateTotals;
         }
+
+        public string Address { get; set; }
 
         public ICommand AddSetMeal => new RelayCommand(() =>
         {
@@ -133,6 +139,14 @@ namespace HillStationPOS.ViewModel
             {
                 LoadData();
             }
+        });
+
+        public string OrderNumber { get; set; }
+
+        public ICommand PrintReport => new RelayCommand(() =>
+        {
+            PrintWorker worker = new PrintWorker();
+            worker.PrintOrder(this);
         });
 
         public event OrderItemAddedEventHandler OrderItemAdded;

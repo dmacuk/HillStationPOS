@@ -1,8 +1,10 @@
-﻿using HillStationPOS.Interfaces;
+﻿using System.Diagnostics.CodeAnalysis;
+using HillStationPOS.Interfaces;
 using HillStationPOS.Windows;
 
 namespace HillStationPOS.Services
 {
+    [SuppressMessage("ReSharper", "ClassNeverInstantiated.Global")]
     internal class WindowService : IWindowService
     {
         public bool ModifyMenu()

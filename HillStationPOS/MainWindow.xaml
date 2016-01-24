@@ -4,8 +4,9 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:ignore="http://www.galasoft.ch/ignore"
-        xmlns:model="clr-namespace:HillStationPOS.Model.Entities"
+        xmlns:entities="clr-namespace:HillStationPOS.Model.Entities"
         xmlns:convertors="clr-namespace:HillStationPOS.Convertors"
+        xmlns:model="clr-namespace:HillStationPOS.Model"
         xmlns:interfaces="clr-namespace:HillStationPOS.Interfaces"
         mc:Ignorable="d ignore"
         Height="490"
@@ -17,7 +18,7 @@
         x:Name="OrderWindow">
     <Window.Resources>
         <convertors:BoolToVisibilityConverter x:Key="Converter" />
-        <DataTemplate x:Key="HeaderTemplate" DataType="model:Header">
+        <DataTemplate x:Key="HeaderTemplate" DataType="entities:Header">
             <StackPanel>
                 <TextBlock x:Name="HeaderText" Text="{Binding Title}" FontSize="24" FontWeight="Bold" />
                 <Button Content="Select"
@@ -46,7 +47,7 @@
             <Setter Property="TextDecorations" Value="{x:Null}" />
 
         </Style>
-        <DataTemplate x:Key="MealTemplate" DataType="model:Meal">
+        <DataTemplate x:Key="MealTemplate" DataType="entities:Meal">
             <Border Style="{StaticResource BorderStyle}">
                 <StackPanel>
                     <TextBlock Text="{Binding Title}" FontSize="24" FontWeight="Bold" Margin="5" />
@@ -126,6 +127,7 @@
         </Grid.RowDefinitions>
         <Menu Grid.Row="0" Margin="5">
             <MenuItem Header="Options">
+                <MenuItem Header="View Report" Command="{Binding PrintReport}" />
                 <MenuItem Header="Setup Menu" Command="{Binding SetupMenu}" />
             </MenuItem>
         </Menu>
@@ -158,8 +160,7 @@
                               CanUserDeleteRows="False" CanUserReorderColumns="False" CanUserResizeColumns="False"
                               CanUserResizeRows="False" CanUserSortColumns="False" HorizontalContentAlignment="Stretch">
                         <DataGrid.Columns>
-                            <DataGridTextColumn Binding="{Binding Quantity}" Width="Auto" />
-                            <DataGridTemplateColumn Width="*">
+                            <DataGridTemplateColumn Width="*" IsReadOnly="False">
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate DataType="interfaces:IOrderItem">
                                         <StackPanel>

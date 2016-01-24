@@ -40,9 +40,14 @@
             <Setter Property="BorderThickness" Value="1" />
             <Setter Property="BorderBrush" Value="Black" />
         </Style>
+        <Style x:Key="PriceAdjusterStyle" TargetType="TextBlock">
+            <Setter Property="Margin" Value="0,0,0,5" />
+            <Setter Property="HorizontalAlignment" Value="Center" />
+            <Setter Property="FontWeight" Value="Bold" />
+        </Style>
         <DataTemplate x:Key="MenuMaintenanceTemplate" DataType="messaging:Header">
             <StackPanel>
-                <TextBlock x:Name="HeaderText" Text="{Binding (Title)}" />
+                <TextBlock x:Name="HeaderText" Text="{Binding (Title)}" FontWeight="Bold"/>
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*" />
@@ -54,7 +59,7 @@
                     </Grid.ColumnDefinitions>
                     <Border Grid.Column="0" Style="{StaticResource IncBorderStyle}">
                         <StackPanel>
-                            <TextBlock Text="Price" Margin="0,0,0,5" HorizontalAlignment="Center" />
+                            <TextBlock Text="Price" Style="{StaticResource PriceAdjusterStyle}"/>
                             <StackPanel Orientation="Horizontal">
                                 <Button Style="{StaticResource DecStyle}" CommandParameter="Price" />
                                 <Button Style="{StaticResource IncStyle}" CommandParameter="Price" />
@@ -63,7 +68,7 @@
                     </Border>
                     <Border Grid.Column="1" Style="{StaticResource IncBorderStyle}">
                         <StackPanel>
-                            <TextBlock Text="Chicken" Margin="0,0,0,5" HorizontalAlignment="Center" />
+                            <TextBlock Text="Chicken" Style="{StaticResource PriceAdjusterStyle}"/>
                             <StackPanel Orientation="Horizontal">
                                 <Button Style="{StaticResource DecStyle}" CommandParameter="Chicken" />
                                 <Button Style="{StaticResource IncStyle}" CommandParameter="Chicken" />
@@ -72,7 +77,7 @@
                     </Border>
                     <Border Grid.Column="2" Style="{StaticResource IncBorderStyle}">
                         <StackPanel>
-                            <TextBlock Text="Lamb" Margin="0,0,0,5" HorizontalAlignment="Center" />
+                            <TextBlock Text="Lamb" Style="{StaticResource PriceAdjusterStyle}"/>
                             <StackPanel Orientation="Horizontal">
                                 <Button Style="{StaticResource DecStyle}" CommandParameter="Lamb" />
                                 <Button Style="{StaticResource IncStyle}" CommandParameter="Lamb" />
@@ -81,7 +86,7 @@
                     </Border>
                     <Border Grid.Column="3" Style="{StaticResource IncBorderStyle}">
                         <StackPanel>
-                            <TextBlock Text="Vegetable" Margin="0,0,0,5" HorizontalAlignment="Center" />
+                            <TextBlock Text="Vegetable" Style="{StaticResource PriceAdjusterStyle}"/>
                             <StackPanel Orientation="Horizontal">
                                 <Button Style="{StaticResource DecStyle}" CommandParameter="Vegetable" />
                                 <Button Style="{StaticResource IncStyle}" CommandParameter="Vegetable" />
@@ -90,7 +95,7 @@
                     </Border>
                     <Border Grid.Column="4" Style="{StaticResource IncBorderStyle}">
                         <StackPanel>
-                            <TextBlock Text="Prawn" Margin="0,0,0,5" HorizontalAlignment="Center" />
+                            <TextBlock Text="Prawn" Style="{StaticResource PriceAdjusterStyle}"/>
                             <StackPanel Orientation="Horizontal">
                                 <Button Style="{StaticResource DecStyle}" CommandParameter="Prawn" />
                                 <Button Style="{StaticResource IncStyle}" CommandParameter="Prawn" />
@@ -99,7 +104,7 @@
                     </Border>
                     <Border Grid.Column="5" Style="{StaticResource IncBorderStyle}">
                         <StackPanel>
-                            <TextBlock Text="King Prawn" Margin="0,0,0,5" HorizontalAlignment="Center" />
+                            <TextBlock Text="King Prawn" Style="{StaticResource PriceAdjusterStyle}"/>
                             <StackPanel Orientation="Horizontal">
                                 <Button Style="{StaticResource DecStyle}" CommandParameter="KingPrawn" />
                                 <Button Style="{StaticResource IncStyle}" CommandParameter="KingPrawn" />

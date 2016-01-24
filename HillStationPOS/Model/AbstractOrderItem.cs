@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Text;
@@ -20,7 +21,7 @@ namespace HillStationPOS.Model
 
         private string _description;
 
-        private string _notes;
+        protected string _notes;
         protected decimal _price;
 
         public int Id { get; set; }
@@ -40,10 +41,14 @@ namespace HillStationPOS.Model
         }
 
 
-        public string Notes
+        public virtual string Notes
         {
             get { return _notes; }
-            set { Set("Notes", ref _notes, value); }
+            set
+            {
+                Debug.WriteLine("Setting notes 2");
+                Set("Notes", ref _notes, value);
+            }
         }
 
         public ICommand Delete => new RelayCommand(() => { OnOrderDeleted(null); });
