@@ -16,5 +16,10 @@ namespace HillStationPOS.Services.Design
         {
             return null;
         }
+
+        public Task<List<Customer>> LoadCustomersAsync()
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }

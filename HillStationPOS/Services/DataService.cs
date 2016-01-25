@@ -27,5 +27,19 @@ namespace HillStationPOS.Services
                 return result;
             });
         }
+
+        public async Task<List<Customer>> LoadCustomersAsync()
+        {
+            return await Task.Factory.StartNew(() =>
+            {
+                var result = new List<Customer>();
+                using (var entities = new HillStationEntities())
+                {
+                    result.AddRange(
+                        entities.Customers1);
+                }
+                return result;
+            });
+        }
     }
 }

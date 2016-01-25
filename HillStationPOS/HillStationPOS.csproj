@@ -71,6 +71,7 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="Syncfusion.Chart.WPF, Version=13.4460.0.53, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89, processorArchitecture=MSIL" />
+    <Reference Include="Syncfusion.Data.WPF, Version=13.4460.0.53, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89, processorArchitecture=MSIL" />
     <Reference Include="Syncfusion.Gauge.WPF, Version=13.4460.0.53, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89, processorArchitecture=MSIL" />
     <Reference Include="Syncfusion.Grid.WPF, Version=13.4460.0.53, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89, processorArchitecture=MSIL" />
     <Reference Include="Syncfusion.Linq.Base, Version=13.4460.0.53, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89, processorArchitecture=MSIL" />
@@ -79,6 +80,7 @@
     <Reference Include="Syncfusion.ReportDesigner.WPF, Version=13.4460.0.53, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89, processorArchitecture=MSIL" />
     <Reference Include="Syncfusion.ReportViewer.WPF, Version=13.4460.0.53, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89, processorArchitecture=MSIL" />
     <Reference Include="Syncfusion.ReportWriter.Base, Version=13.4460.0.53, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89, processorArchitecture=MSIL" />
+    <Reference Include="Syncfusion.SfGrid.WPF, Version=13.4460.0.53, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89, processorArchitecture=MSIL" />
     <Reference Include="Syncfusion.SfMaps.WPF, Version=13.4460.0.53, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89, processorArchitecture=MSIL" />
     <Reference Include="Syncfusion.Shared.WPF, Version=13.4460.0.53, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89, processorArchitecture=MSIL" />
     <Reference Include="Syncfusion.Tools.WPF, Version=13.4460.0.53, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89, processorArchitecture=MSIL" />
@@ -147,9 +149,10 @@
     <Compile Include="Exceptions\DatabaseException.cs" />
     <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="Interfaces\IDataService.cs" />
-    <Compile Include="Interfaces\IOrderItem.cs" />
     <Compile Include="Interfaces\IWindowService.cs" />
-    <Compile Include="Model\AbstractOrderItem.cs" />
+    <Compile Include="Model\Entities\Customer.cs">
+      <DependentUpon>HillStationModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Model\Entities\Header.cs">
       <DependentUpon>HillStationModel.tt</DependentUpon>
     </Compile>
@@ -171,10 +174,10 @@
     <Compile Include="Model\Entities\Meal.cs">
       <DependentUpon>HillStationModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Model\Entities\PartialClasses\Customer.cs" />
     <Compile Include="Model\Entities\PartialClasses\Header.cs" />
     <Compile Include="Model\Entities\PartialClasses\Meal.cs" />
     <Compile Include="Model\OrderItem.cs" />
-    <Compile Include="Model\SetMeal.cs" />
     <Compile Include="Services\DataService.cs" />
     <Compile Include="Services\Design\DesignDataService.cs" />
     <Compile Include="Services\Design\DesignWindowService.cs" />

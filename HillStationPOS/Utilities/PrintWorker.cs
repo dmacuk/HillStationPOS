@@ -19,7 +19,7 @@ namespace HillStationPOS.Utilities
 
             var writer = new ReportWriter {ReportProcessingMode = ProcessingMode.Local};
             writer.DataSources.Clear();
-            writer.DataSources.Add(new ReportDataSource {Name = "OrderItems", Value = model.Order});
+            writer.DataSources.Add(new ReportDataSource {Name = "OrderItems", Value = model.OrderItems});
             writer.LoadReport(reportStream);
 
             var parameters = new List<ReportParameter>();
@@ -27,8 +27,8 @@ namespace HillStationPOS.Utilities
             {
                 var param = new ReportParameter
                 {
-                    Name = parameter.Name,
-                    Prompt = parameter.Prompt
+                    Prompt = parameter.Prompt,
+                    Name = parameter.Name
                 };
                 switch (param.Name)
                 {

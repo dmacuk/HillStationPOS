@@ -4,7 +4,14 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="HillStationModel.Store" Provider="System.Data.VistaDB5" ProviderManifestToken="5.0" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="HillStationModel.Store" Provider="System.Data.VistaDB5" ProviderManifestToken="5.0" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="customer">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="details" Type="text" Nullable="false" />
+        </EntityType>
         <EntityType Name="Header">
           <Key>
             <PropertyRef Name="id" />
@@ -42,6 +49,7 @@
           </ReferentialConstraint>
         </Association>
         <EntityContainer Name="HillStationModelStoreContainer">
+          <EntitySet Name="customer" EntityType="Self.customer" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Header" EntityType="Self.Header" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Meal" EntityType="Self.Meal" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_Meal_Header" Association="Self.FK_Meal_Header">
@@ -49,8 +57,7 @@
             <End Role="Meal" EntitySet="Meal" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="HillStationModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -99,7 +106,15 @@
             <End Role="Header" EntitySet="Headers" />
             <End Role="Meal" EntitySet="Meals" />
           </AssociationSet>
+          <EntitySet Name="Customers1" EntityType="HillStationModel.Customer" />
         </EntityContainer>
+        <EntityType Name="Customer">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Details" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -129,6 +144,14 @@
                 <ScalarProperty Name="PrawnPrice" ColumnName="prawnprice" />
                 <ScalarProperty Name="KingPrawnPrice" ColumnName="kingprawnprice" />
                 <ScalarProperty Name="DisplayOrder" ColumnName="displayorder" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Customers1">
+            <EntityTypeMapping TypeName="HillStationModel.Customer">
+              <MappingFragment StoreEntitySet="customer">
+                <ScalarProperty Name="Details" ColumnName="details" />
+                <ScalarProperty Name="Id" ColumnName="id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

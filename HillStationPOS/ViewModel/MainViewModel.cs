@@ -26,9 +26,18 @@ namespace HillStationPOS.ViewModel
     {
         public delegate void OrderItemAddedEventHandler(object sender, OrderItemAddedEventArgs e);
 
+        /// <summary>
+        ///     The <see cref="Address" /> property's name.
+        /// </summary>
+        private const string AddressPropertyName = "Address";
+
         private readonly IDataService _dataService;
 
         private readonly IWindowService _windowService;
+
+        private string _address;
+        private List<Customer> _customers;
+
         private Header _header;
 
         private List<Header> _headers;
@@ -46,7 +55,7 @@ namespace HillStationPOS.ViewModel
             _windowService = windowService;
             Headers = new List<Header>();
             Meals = new List<Meal>();
-            Order = new ObservableCollection<IOrderItem>();
+            OrderItems = new ObservableCollection<OrderItem>();
             if (IsInDesignMode)
             {
                 var orderItem = new OrderItem
@@ -55,7 +64,7 @@ namespace HillStationPOS.ViewModel
                     Price = 10.95M,
                     Notes = "These are meal notes"
                 };
-                Order.Add(orderItem);
+                OrderItems.Add(orderItem);
 
                 var header = new Header {Title = "Starters"};
                 Headers.Add(header);
@@ -75,15 +84,26 @@ namespace HillStationPOS.ViewModel
                 Address = "David McCallum" + Environment.NewLine + "10 Bingham Broadway" + Environment.NewLine +
                           "EH15 3JL" + Environment.NewLine + "07757 438 032";
             }
-            Order.CollectionChanged += UpdateTotals;
+            OrderNumber = "A0001";
+            Address = "David McCallum" + Environment.NewLine + "10 Bingham Broadway" + Environment.NewLine +
+                      "EH15 3JL" + Environment.NewLine + "07757 438 032";
+            OrderItems.CollectionChanged += UpdateTotals;
         }
 
-        public string Address { get; set; }
+        /// <summary>
+        ///     Sets and gets the Address property.
+        ///     Changes to that property's value raise the PropertyChanged event.
+        /// </summary>
+        public string Address
+        {
+            get { return _address; }
+            set { Set(AddressPropertyName, ref _address, value); }
+        }
 
         public ICommand AddSetMeal => new RelayCommand(() =>
         {
-            IOrderItem meal = new SetMeal();
-            Order.Add(meal);
+            //            IOrderItem meal = new SetMeal();
+            //            OrderItems.Add(meal);
         });
 
         public Header Header
@@ -126,12 +146,20 @@ namespace HillStationPOS.ViewModel
             set { Set("Meals", ref _meals, value); }
         }
 
-        public ObservableCollection<IOrderItem> Order { get; set; }
+        public ObservableCollection<OrderItem> OrderItems { get; set; }
+
+        public string OrderNumber { get; set; }
 
         public decimal OrderTotal
         {
-            get { return Order.Sum(x => x.Price); }
+            get { return OrderItems.Sum(x => x.Price); }
         }
+
+        public ICommand PrintReport => new RelayCommand(() =>
+        {
+            var worker = new PrintWorker();
+            worker.PrintOrder(this);
+        });
 
         public ICommand SetupMenu => new RelayCommand(() =>
         {
@@ -139,14 +167,6 @@ namespace HillStationPOS.ViewModel
             {
                 LoadData();
             }
-        });
-
-        public string OrderNumber { get; set; }
-
-        public ICommand PrintReport => new RelayCommand(() =>
-        {
-            PrintWorker worker = new PrintWorker();
-            worker.PrintOrder(this);
         });
 
         public event OrderItemAddedEventHandler OrderItemAdded;
@@ -159,6 +179,7 @@ namespace HillStationPOS.ViewModel
         ////public override void Cleanup()
         public async void LoadData()
         {
+            _customers = await _dataService.LoadCustomersAsync();
             var headers = await _dataService.LoadMenuAsync();
             Headers = new List<Header>(headers);
             if (headers.Count > 0)
@@ -175,19 +196,19 @@ namespace HillStationPOS.ViewModel
         private void DeleteOrderItem(object sender, EventArgs e)
         {
             var item = (OrderItem) sender;
-            Order.Remove(item);
+            OrderItems.Remove(item);
         }
 
         private void MealAdded(object sender, MealAddedEventArgs e)
         {
             var meal = sender as Meal;
             if (meal == null) return;
-            var id = Order.Count == 0 ? 1 : Order.Max(order => order.Id) + 1;
-            IOrderItem item = new OrderItem();
+            var id = OrderItems.Count == 0 ? 1 : OrderItems.Max(order => order.Id) + 1;
+            var item = new OrderItem();
             item.AddMeal(id, meal, e.MealType);
             item.OrderDeleted += DeleteOrderItem;
-            Order.Add(item);
-            OnOrderItemAdded(new OrderItemAddedEventArgs {OrderItem = item});
+            OrderItems.Add(item);
+            OnOrderItemAdded(new OrderItemAddedEventArgs {OrderItemAdded = item});
         }
 
         private void UpdateTotals(object sender, NotifyCollectionChangedEventArgs e)
@@ -198,6 +219,6 @@ namespace HillStationPOS.ViewModel
 
     public class OrderItemAddedEventArgs : EventArgs
     {
-        public IOrderItem OrderItem { get; set; }
+        public OrderItem OrderItemAdded { get; set; }
     }
 }

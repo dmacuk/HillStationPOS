@@ -27,5 +27,6 @@ namespace HillStationPOS.Model.Entities
     
         public virtual DbSet<Header> Headers { get; set; }
         public virtual DbSet<Meal> Meals { get; set; }
+        public virtual DbSet<Customer> Customers1 { get; set; }
     }
 }

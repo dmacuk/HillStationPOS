@@ -32,13 +32,18 @@ namespace HillStationPOS
 
         private void OrderItemAdded(object sender, OrderItemAddedEventArgs e)
         {
-            OrderGrid.SelectedItem = e.OrderItem;
-            OrderGrid.ScrollIntoView(e.OrderItem);
+            OrderGrid.SelectedItem = e.OrderItemAdded;
+            OrderGrid.ScrollIntoView(e.OrderItemAdded);
         }
 
         private void WindowClosing(object sender, CancelEventArgs e)
         {
             this.SaveSettings(false);
+        }
+
+        private void StartEdit(object sender, RoutedEventArgs e)
+        {
+            OrderGrid.BeginEdit();
         }
     }
 }
