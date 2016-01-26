@@ -9,64 +9,21 @@
 
 namespace HillStationPOS.Model.Entities
 {
-    using GalaSoft.MvvmLight;
     using System;
     using System.Collections.Generic;
-    using System.Diagnostics;
-    public partial class Meal: ObservableObject
+    
+    public partial class Meal
     {
-        public Meal()
-        {
-
-        }
-
         public long Id { get; set; }
         public long HeaderId { get; set; }
         public Nullable<short> MealNumber { get; set; }
         public string Title { get; set; }
-        private decimal _price;
-        private decimal _chickenPrice;
-        private decimal _lambPrice;
-        private decimal _vegetablePrice;
-        private decimal _prawnPrice;
-        private decimal _kingPrawnPrice;
-
-        public decimal Price
-        {
-            get { return _price; }
-            set { Set("Price", ref _price, value); }
-        }
-
-        public decimal ChickenPrice
-        {
-            get { return _chickenPrice; }
-            set { Set("ChickenPrice", ref _chickenPrice, value); }
-        }
-
-        public decimal LambPrice
-        {
-            get { return _lambPrice; }
-            set { Set("LambPrice", ref _lambPrice, value); }
-        }
-
-        public decimal VegetablePrice
-        {
-            get { return _vegetablePrice; }
-            set { Set("VegetablePrice", ref _vegetablePrice, value); }
-        }
-
-        public decimal PrawnPrice
-        {
-            get { return _prawnPrice; }
-            set { Set("PrawnPrice", ref _prawnPrice, value); }
-        }
-
-        public decimal KingPrawnPrice
-        {
-            get { return _kingPrawnPrice; }
-            set { Set("KingPrawnPrice", ref _kingPrawnPrice, value); }
-        }
-
+        public decimal Price { get; set; }
+        public decimal ChickenPrice { get; set; }
+        public decimal LambPrice { get; set; }
+        public decimal VegetablePrice { get; set; }
+        public decimal PrawnPrice { get; set; }
+        public decimal KingPrawnPrice { get; set; }
         public short DisplayOrder { get; set; }
     
         public virtual Header Header { get; set; }

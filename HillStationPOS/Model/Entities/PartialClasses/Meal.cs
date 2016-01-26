@@ -1,14 +1,22 @@
-﻿using GalaSoft.MvvmLight.CommandWpf;
-using System;
+﻿using System;
 using System.Windows;
 using System.Windows.Input;
+using GalaSoft.MvvmLight.CommandWpf;
+using PropertyChanged;
 
 namespace HillStationPOS.Model.Entities
 {
+    [ImplementPropertyChanged]
     public partial class Meal
     {
+        // NOTE: Revert meal classes before committing
 
         public delegate void MealAddedEventHandler(object sender, MealAddedEventArgs e);
+
+        public Meal()
+        {
+        }
+
 
         public Meal(Meal meal)
         {
@@ -38,15 +46,15 @@ namespace HillStationPOS.Model.Entities
             {
                 return new RelayCommand<string>(mealTypeString =>
                 {
-                    var mealType = (MealType)Enum.Parse(typeof(MealType), mealTypeString);
-                    OnMealAdded(new MealAddedEventArgs { MealType = mealType });
+                    var mealType = (MealType) Enum.Parse(typeof (MealType), mealTypeString);
+                    OnMealAdded(new MealAddedEventArgs {MealType = mealType});
                 });
             }
         }
 
         public event MealAddedEventHandler MealAdded;
 
-        protected virtual void OnMealAdded(MealAddedEventArgs e)
+        private void OnMealAdded(MealAddedEventArgs e)
         {
             MealAdded?.Invoke(this, e);
         }
@@ -120,7 +128,6 @@ namespace HillStationPOS.Model.Entities
             }
             return prefix + Title;
         }
-
     }
 }
 
@@ -138,4 +145,3 @@ public enum MealType
     Prawn,
     KingPrawn
 }
-

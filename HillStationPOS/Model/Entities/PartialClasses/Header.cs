@@ -1,9 +1,11 @@
 ﻿using System.Linq;
+using PropertyChanged;
 
 // ReSharper disable once CheckNamespace
 
 namespace HillStationPOS.Model.Entities
 {
+    [ImplementPropertyChanged]
     public partial class Header
     {
         public Header(Header header) : this()

@@ -216,18 +216,8 @@
                                                 Margin="5,5,5,0"
                                                 FontWeight="Bold"
                                                 Text="{Binding Description}" />
-                                            <TextBox
-                                                x:Name="TxtNotes"
-                                                Margin="5,0,5,5"
-                                                Text="{Binding Notes}" />
+                                            <TextBox Margin="5,0,5,5" Text="{Binding Notes}" />
                                         </StackPanel>
-                                        <DataTemplate.Triggers>
-                                            <Trigger SourceName="TxtNotes" Property="IsVisible" Value="True">
-                                                <Setter TargetName="TxtNotes" Property="FocusManager.FocusedElement"
-                                                        Value="{Binding ElementName=TxtNotes}" />
-                                            </Trigger>
-                                        </DataTemplate.Triggers>
-
                                     </DataTemplate>
                                 </DataGridTemplateColumn.CellEditingTemplate>
                                 <DataGridTemplateColumn.CellTemplate>
