@@ -36,10 +36,21 @@ namespace HillStationPOS.Services
                 using (var entities = new HillStationEntities())
                 {
                     result.AddRange(
-                        entities.Customers1);
+                        entities.Customers.OrderBy(c => c.Details));
                 }
                 return result;
             });
+        }
+
+        public Customer AddCustomer(Customer customer)
+        {
+            using (var entities = new HillStationEntities())
+            {
+                entities.Customers.Add(customer);
+                entities.SaveChanges();
+                entities.Entry(customer).Reload();
+                return customer;
+            }
         }
     }
 }

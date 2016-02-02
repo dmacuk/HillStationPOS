@@ -50,11 +50,9 @@
         <DataTemplate x:Key="MealTemplate" DataType="entities:Meal">
             <Border Style="{StaticResource BorderStyle}">
                 <StackPanel>
-                    <TextBlock
-                        Margin="5"
-                        FontSize="24"
-                        FontWeight="Bold"
-                        Text="{Binding Title}" />
+                    <TextBlock Style="{StaticResource CaptionStyle}"
+                               FontSize="24"
+                               Text="{Binding Title}" />
                     <Grid>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*" />
@@ -155,11 +153,9 @@
         </Menu>
         <Grid Grid.Row="1">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="Auto" />
-                <ColumnDefinition Width="5" />
-                <ColumnDefinition Width="Auto" />
-                <ColumnDefinition Width="5" />
                 <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="2*" />
             </Grid.ColumnDefinitions>
             <Border
                 Grid.Row="0"
@@ -170,14 +166,9 @@
                     ItemsSource="{Binding Headers}"
                     SelectedItem="{Binding Header}" />
             </Border>
-            <GridSplitter
-                Grid.Row="0"
-                Grid.Column="1"
-                Width="5"
-                HorizontalAlignment="Stretch" />
             <Border
                 Grid.Row="0"
-                Grid.Column="2"
+                Grid.Column="1"
                 Style="{StaticResource BorderStyle}">
                 <ListBox
                     HorizontalContentAlignment="Stretch"
@@ -185,72 +176,109 @@
                     ItemsSource="{Binding Meals}"
                     SelectedItem="{Binding Meal}" />
             </Border>
-            <GridSplitter
-                Grid.Row="0"
-                Grid.Column="3"
-                Width="5"
-                HorizontalAlignment="Stretch" />
-            <Grid Grid.Column="4">
+            <Grid Grid.Column="2">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*" />
                     <RowDefinition Height="Auto" />
                 </Grid.RowDefinitions>
                 <Border Grid.Row="0" Style="{StaticResource BorderStyle}">
-                    <DataGrid
-                        x:Name="OrderGrid"
-                        HorizontalContentAlignment="Stretch"
-                        AutoGenerateColumns="False"
-                        CanUserDeleteRows="False"
-                        CanUserReorderColumns="False"
-                        CanUserResizeColumns="False"
-                        CanUserResizeRows="False"
-                        CanUserSortColumns="False"
-                        GotFocus="StartEdit"
-                        ItemsSource="{Binding OrderItems}">
-                        <DataGrid.Columns>
-                            <DataGridTemplateColumn Width="*">
-                                <DataGridTemplateColumn.CellEditingTemplate>
-                                    <DataTemplate DataType="model:OrderItem">
-                                        <StackPanel>
-                                            <TextBlock
-                                                Margin="5,5,5,0"
-                                                FontWeight="Bold"
-                                                Text="{Binding Description}" />
-                                            <TextBox Margin="5,0,5,5" Text="{Binding Notes}" />
-                                        </StackPanel>
-                                    </DataTemplate>
-                                </DataGridTemplateColumn.CellEditingTemplate>
-                                <DataGridTemplateColumn.CellTemplate>
-                                    <DataTemplate DataType="model:OrderItem">
-                                        <StackPanel>
-                                            <TextBlock
-                                                Margin="5,5,5,0"
-                                                FontWeight="Bold"
-                                                Text="{Binding Description}" />
-                                            <TextBox Margin="5,0,5,5" Text="{Binding Notes}" />
-                                        </StackPanel>
-                                    </DataTemplate>
-                                </DataGridTemplateColumn.CellTemplate>
-                            </DataGridTemplateColumn>
-                            <DataGridTextColumn Width="Auto" Binding="{Binding Price, StringFormat=N2}" />
-                            <DataGridTemplateColumn Width="Auto">
-                                <DataGridTemplateColumn.CellTemplate>
-                                    <DataTemplate DataType="model:OrderItem">
-                                        <TextBlock VerticalAlignment="Center">
-                                            <Hyperlink Style="{StaticResource HyperlinkStyle}"
-                                                       Command="{Binding Delete}">
-                                                <Image
-                                                    x:Name="ImageDelete"
-                                                    Width="40"
-                                                    Height="40"
-                                                    Source="Images/Garbage-Closed.png" />
-                                            </Hyperlink>
-                                        </TextBlock>
-                                    </DataTemplate>
-                                </DataGridTemplateColumn.CellTemplate>
-                            </DataGridTemplateColumn>
-                        </DataGrid.Columns>
-                    </DataGrid>
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="*" />
+                        </Grid.RowDefinitions>
+                        <Border Grid.Row="0" Style="{StaticResource BorderStyle}">
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="*" />
+                                    <RowDefinition Height="Auto" />
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="Auto" />
+                                </Grid.ColumnDefinitions>
+                                <TextBlock Grid.Row="0" Grid.Column="0" Text="No."
+                                           Style="{StaticResource CaptionStyle}" />
+                                <TextBlock Grid.Row="1" Grid.Column="0" Text="Addr."
+                                           Style="{StaticResource CaptionStyle}" />
+                                <TextBlock Grid.Row="0" Grid.Column="1" Text="{Binding OrderNumber}" Margin="5" />
+                                <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding Address}" MinLines="4"
+                                         TextWrapping="Wrap" AcceptsReturn="True" MaxLines="4" />
+                                <Button Content="Add" Grid.Row="1" Grid.Column="2" HorizontalAlignment="Center"
+                                        VerticalAlignment="Top" Margin="5" />
+                                <StackPanel Orientation="Horizontal" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="3">
+                                    <TextBlock Style="{StaticResource CaptionStyle}" Text="Card" />
+                                    <TextBox Margin="5" HorizontalAlignment="Center" Text="1234-1234-1234-1234"
+                                             MinWidth="130" />
+                                    <TextBlock Text="Expire" Style="{StaticResource CaptionStyle}" />
+                                    <TextBox Margin="5" Text="1234" MinWidth="35" />
+                                    <TextBlock Text="CVV" Style="{StaticResource CaptionStyle}" />
+                                    <TextBox Margin="5" Text="123" MinWidth="30" />
+                                    <TextBlock Text="Post" Style="{StaticResource CaptionStyle}" />
+                                    <TextBox Margin="5" Text="105 10" MinWidth="45" />
+                                </StackPanel>
+                            </Grid>
+                        </Border>
+                        <Border Grid.Row="1" Style="{StaticResource BorderStyle}">
+                            <DataGrid
+                                x:Name="OrderGrid"
+                                HorizontalContentAlignment="Stretch"
+                                AutoGenerateColumns="False"
+                                CanUserDeleteRows="False"
+                                CanUserReorderColumns="False"
+                                CanUserResizeColumns="False"
+                                CanUserResizeRows="False"
+                                CanUserSortColumns="False"
+                                GotFocus="StartEdit"
+                                ItemsSource="{Binding OrderItems}">
+                                <DataGrid.Columns>
+                                    <DataGridTemplateColumn Width="*">
+                                        <DataGridTemplateColumn.CellEditingTemplate>
+                                            <DataTemplate DataType="model:OrderItem">
+                                                <StackPanel>
+                                                    <TextBlock
+                                                        Margin="5,5,5,0"
+                                                        FontWeight="Bold"
+                                                        Text="{Binding Description}" />
+                                                    <TextBox Margin="5,0,5,5" Text="{Binding Notes}" />
+                                                </StackPanel>
+                                            </DataTemplate>
+                                        </DataGridTemplateColumn.CellEditingTemplate>
+                                        <DataGridTemplateColumn.CellTemplate>
+                                            <DataTemplate DataType="model:OrderItem">
+                                                <StackPanel>
+                                                    <TextBlock
+                                                        Margin="5,5,5,0"
+                                                        FontWeight="Bold"
+                                                        Text="{Binding Description}" />
+                                                    <TextBox Margin="5,0,5,5" Text="{Binding Notes}" />
+                                                </StackPanel>
+                                            </DataTemplate>
+                                        </DataGridTemplateColumn.CellTemplate>
+                                    </DataGridTemplateColumn>
+                                    <DataGridTextColumn Width="Auto" Binding="{Binding Price, StringFormat=N2}" />
+                                    <DataGridTemplateColumn Width="Auto">
+                                        <DataGridTemplateColumn.CellTemplate>
+                                            <DataTemplate DataType="model:OrderItem">
+                                                <TextBlock VerticalAlignment="Center">
+                                                    <Hyperlink Style="{StaticResource HyperlinkStyle}"
+                                                               Command="{Binding Delete}">
+                                                        <Image
+                                                            x:Name="ImageDelete"
+                                                            Width="40"
+                                                            Height="40"
+                                                            Source="Images/Garbage-Closed.png" />
+                                                    </Hyperlink>
+                                                </TextBlock>
+                                            </DataTemplate>
+                                        </DataGridTemplateColumn.CellTemplate>
+                                    </DataGridTemplateColumn>
+                                </DataGrid.Columns>
+                            </DataGrid>
+                        </Border>
+                    </Grid>
                 </Border>
                 <Border Grid.Row="1" Style="{StaticResource BorderStyle}">
                     <Grid>

@@ -45,29 +45,13 @@ namespace HillStationPOS.ViewModel
 
             SimpleIoc.Default.Register<MainViewModel>();
             SimpleIoc.Default.Register<MenuViewModel>();
+            SimpleIoc.Default.Register<CustomerPickerModel>();
         }
 
-        /// <summary>
-        ///     Gets the Main property.
-        /// </summary>
-        [SuppressMessage("Microsoft.Performance",
-            "CA1822:MarkMembersAsStatic",
-            Justification = "This non-static member is needed for data binding purposes.")]
-        public MainViewModel Main
-        {
-            get { return ServiceLocator.Current.GetInstance<MainViewModel>(); }
-        }
+        public MainViewModel Main => ServiceLocator.Current.GetInstance<MainViewModel>();
 
-        /// <summary>
-        ///     Gets the Main property.
-        /// </summary>
-        [SuppressMessage("Microsoft.Performance",
-            "CA1822:MarkMembersAsStatic",
-            Justification = "This non-static member is needed for data binding purposes.")]
-        public MenuViewModel Menu
-        {
-            get { return ServiceLocator.Current.GetInstance<MenuViewModel>(); }
-        }
+        public MenuViewModel Menu => ServiceLocator.Current.GetInstance<MenuViewModel>();
+        public CustomerPickerModel Customers => ServiceLocator.Current.GetInstance<CustomerPickerModel>();
 
         /// <summary>
         ///     Cleans up all the resources.

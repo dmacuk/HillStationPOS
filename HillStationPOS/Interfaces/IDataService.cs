@@ -9,5 +9,6 @@ namespace HillStationPOS.Interfaces
         string GetSetMealIdentifier();
         Task<List<Header>> LoadMenuAsync();
         Task<List<Customer>> LoadCustomersAsync();
+        Customer AddCustomer(Customer customer);
     }
 }

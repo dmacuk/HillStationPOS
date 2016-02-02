@@ -1,39 +1,34 @@
-﻿<Window x:Class="HillStationPOS.Windows.MenuMaintenanceWindow"
-        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:entities="clr-namespace:HillStationPOS.Model.Entities"
-        mc:Ignorable="d"
-        DataContext="{Binding Menu, Source={StaticResource Locator}}"
-        Title="Menu Maintenace" Height="300" Width="732.047"
-        xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
-        xmlns:messaging="clr-namespace:System.Runtime.Remoting.Messaging;assembly=mscorlib"
-        Loaded="WindowLoaded">
+﻿<Window
+    x:Class="HillStationPOS.Windows.MenuMaintenanceWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:entities="clr-namespace:HillStationPOS.Model.Entities"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:syncfusion="http://schemas.syncfusion.com/wpf"
+    Title="Menu Maintenace"
+    Width="732.047"
+    Height="300"
+    DataContext="{Binding Menu, Source={StaticResource Locator}}"
+    Loaded="WindowLoaded"
+    mc:Ignorable="d">
+
 
     <Window.Resources>
-        <Style x:Key="SpinnerStyle" TargetType="xctk:DecimalUpDown">
-            <Setter Property="FormatString" Value="C2" />
-            <Setter Property="Increment" Value="0.05" />
-            <Setter Property="Minimum" Value="0" />
-        </Style>
         <Style x:Key="IncStyle" TargetType="Button">
             <Setter Property="Margin" Value="5" />
             <Setter Property="Width" Value="20" />
             <Setter Property="Content" Value="+5" />
             <Setter Property="Command"
-                    Value="{Binding RelativeSource=
-					{RelativeSource FindAncestor, 
-					AncestorType={x:Type Window}}, 
-					Path=DataContext.Increment}" />
+                    Value="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}, Path=DataContext.Increment}" />
         </Style>
-        <Style x:Key="DecStyle" TargetType="Button" BasedOn="{StaticResource IncStyle}">
+        <Style
+            x:Key="DecStyle"
+            BasedOn="{StaticResource IncStyle}"
+            TargetType="Button">
             <Setter Property="Content" Value="-5" />
             <Setter Property="Command"
-                    Value="{Binding RelativeSource=
-					{RelativeSource FindAncestor, 
-					AncestorType={x:Type Window}}, 
-					Path=DataContext.Decrement}" />
+                    Value="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}, Path=DataContext.Decrement}" />
         </Style>
         <Style x:Key="IncBorderStyle" TargetType="Border">
             <Setter Property="Margin" Value="5" />
@@ -45,9 +40,12 @@
             <Setter Property="HorizontalAlignment" Value="Center" />
             <Setter Property="FontWeight" Value="Bold" />
         </Style>
-        <DataTemplate x:Key="MenuMaintenanceTemplate" DataType="messaging:Header">
+        <DataTemplate x:Key="MenuMaintenanceTemplate" DataType="entities:Header">
             <StackPanel>
-                <TextBlock x:Name="HeaderText" Text="{Binding (Title)}" FontWeight="Bold"/>
+                <TextBlock
+                    x:Name="HeaderText"
+                    FontWeight="Bold"
+                    Text="{Binding Title}" />
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*" />
@@ -59,7 +57,7 @@
                     </Grid.ColumnDefinitions>
                     <Border Grid.Column="0" Style="{StaticResource IncBorderStyle}">
                         <StackPanel>
-                            <TextBlock Text="Price" Style="{StaticResource PriceAdjusterStyle}"/>
+                            <TextBlock Style="{StaticResource PriceAdjusterStyle}" Text="Price" />
                             <StackPanel Orientation="Horizontal">
                                 <Button Style="{StaticResource DecStyle}" CommandParameter="Price" />
                                 <Button Style="{StaticResource IncStyle}" CommandParameter="Price" />
@@ -68,7 +66,7 @@
                     </Border>
                     <Border Grid.Column="1" Style="{StaticResource IncBorderStyle}">
                         <StackPanel>
-                            <TextBlock Text="Chicken" Style="{StaticResource PriceAdjusterStyle}"/>
+                            <TextBlock Style="{StaticResource PriceAdjusterStyle}" Text="Chicken" />
                             <StackPanel Orientation="Horizontal">
                                 <Button Style="{StaticResource DecStyle}" CommandParameter="Chicken" />
                                 <Button Style="{StaticResource IncStyle}" CommandParameter="Chicken" />
@@ -77,7 +75,7 @@
                     </Border>
                     <Border Grid.Column="2" Style="{StaticResource IncBorderStyle}">
                         <StackPanel>
-                            <TextBlock Text="Lamb" Style="{StaticResource PriceAdjusterStyle}"/>
+                            <TextBlock Style="{StaticResource PriceAdjusterStyle}" Text="Lamb" />
                             <StackPanel Orientation="Horizontal">
                                 <Button Style="{StaticResource DecStyle}" CommandParameter="Lamb" />
                                 <Button Style="{StaticResource IncStyle}" CommandParameter="Lamb" />
@@ -86,7 +84,7 @@
                     </Border>
                     <Border Grid.Column="3" Style="{StaticResource IncBorderStyle}">
                         <StackPanel>
-                            <TextBlock Text="Vegetable" Style="{StaticResource PriceAdjusterStyle}"/>
+                            <TextBlock Style="{StaticResource PriceAdjusterStyle}" Text="Vegetable" />
                             <StackPanel Orientation="Horizontal">
                                 <Button Style="{StaticResource DecStyle}" CommandParameter="Vegetable" />
                                 <Button Style="{StaticResource IncStyle}" CommandParameter="Vegetable" />
@@ -95,7 +93,7 @@
                     </Border>
                     <Border Grid.Column="4" Style="{StaticResource IncBorderStyle}">
                         <StackPanel>
-                            <TextBlock Text="Prawn" Style="{StaticResource PriceAdjusterStyle}"/>
+                            <TextBlock Style="{StaticResource PriceAdjusterStyle}" Text="Prawn" />
                             <StackPanel Orientation="Horizontal">
                                 <Button Style="{StaticResource DecStyle}" CommandParameter="Prawn" />
                                 <Button Style="{StaticResource IncStyle}" CommandParameter="Prawn" />
@@ -104,7 +102,7 @@
                     </Border>
                     <Border Grid.Column="5" Style="{StaticResource IncBorderStyle}">
                         <StackPanel>
-                            <TextBlock Text="King Prawn" Style="{StaticResource PriceAdjusterStyle}"/>
+                            <TextBlock Style="{StaticResource PriceAdjusterStyle}" Text="King Prawn" />
                             <StackPanel Orientation="Horizontal">
                                 <Button Style="{StaticResource DecStyle}" CommandParameter="KingPrawn" />
                                 <Button Style="{StaticResource IncStyle}" CommandParameter="KingPrawn" />
@@ -114,10 +112,20 @@
                 </Grid>
             </StackPanel>
         </DataTemplate>
+        <Style x:Key="UpDownStyle" TargetType="syncfusion:UpDown">
+            <Setter Property="Culture" Value="en-GB" />
+            <Setter Property="MinValue" Value="0" />
+            <Setter Property="NumberDecimalDigits" Value="2" />
+            <Setter Property="TextAlignment" Value="Right" />
+            <Setter Property="Step" Value="0.05" />
+        </Style>
         <DataTemplate x:Key="MealTemplate" DataType="entities:Meal">
             <Border BorderBrush="Black" BorderThickness="1">
                 <StackPanel>
-                    <TextBlock Text="{Binding Title}" Margin="5" FontWeight="Bold" />
+                    <TextBlock
+                        Margin="5"
+                        FontWeight="Bold"
+                        Text="{Binding Title}" />
                     <Grid>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*" />
@@ -128,28 +136,28 @@
                             <ColumnDefinition Width="*" />
                         </Grid.ColumnDefinitions>
                         <StackPanel Grid.Column="0" Margin="5">
-                            <TextBlock Text="Price" Margin="0,0,0,5" />
-                            <xctk:DecimalUpDown Value="{Binding Price}" Style="{StaticResource SpinnerStyle}" />
+                            <TextBlock Margin="0,0,0,5" Text="Price" />
+                            <syncfusion:UpDown Style="{StaticResource UpDownStyle}" Value="{Binding Price}" />
                         </StackPanel>
                         <StackPanel Grid.Column="1" Margin="5">
-                            <TextBlock Text="Chicken" Margin="0,0,0,5" />
-                            <xctk:DecimalUpDown Value="{Binding ChickenPrice}" Style="{StaticResource SpinnerStyle}" />
+                            <TextBlock Margin="0,0,0,5" Text="Chicken" />
+                            <syncfusion:UpDown Style="{StaticResource UpDownStyle}" Value="{Binding ChickenPrice}" />
                         </StackPanel>
                         <StackPanel Grid.Column="2" Margin="5">
-                            <TextBlock Text="Lamb" Margin="0,0,0,5" />
-                            <xctk:DecimalUpDown Value="{Binding LambPrice}" Style="{StaticResource SpinnerStyle}" />
+                            <TextBlock Margin="0,0,0,5" Text="Lamb" />
+                            <syncfusion:UpDown Style="{StaticResource UpDownStyle}" Value="{Binding LambPrice}" />
                         </StackPanel>
                         <StackPanel Grid.Column="3" Margin="5">
-                            <TextBlock Text="Vegetable" Margin="0,0,0,5" />
-                            <xctk:DecimalUpDown Value="{Binding VegetablePrice}" Style="{StaticResource SpinnerStyle}" />
+                            <TextBlock Margin="0,0,0,5" Text="Vegetable" />
+                            <syncfusion:UpDown Style="{StaticResource UpDownStyle}" Value="{Binding VegetablePrice}" />
                         </StackPanel>
                         <StackPanel Grid.Column="4" Margin="5">
-                            <TextBlock Text="Prawn" Margin="0,0,0,5" />
-                            <xctk:DecimalUpDown Value="{Binding PrawnPrice}" Style="{StaticResource SpinnerStyle}" />
+                            <TextBlock Margin="0,0,0,5" Text="Prawn" />
+                            <syncfusion:UpDown Style="{StaticResource UpDownStyle}" Value="{Binding PrawnPrice}" />
                         </StackPanel>
                         <StackPanel Grid.Column="5" Margin="5">
-                            <TextBlock Text="King Prawn" Margin="0,0,0,5" />
-                            <xctk:DecimalUpDown Value="{Binding KingPrawnPrice}" Style="{StaticResource SpinnerStyle}" />
+                            <TextBlock Margin="0,0,0,5" Text="King Prawn" />
+                            <syncfusion:UpDown Style="{StaticResource UpDownStyle}" Value="{Binding KingPrawnPrice}" />
                         </StackPanel>
                     </Grid>
                 </StackPanel>
@@ -166,21 +174,35 @@
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
         <Grid Grid.Column="0">
-            <ListBox Grid.Column="0" Grid.Row="0"
-                     ItemsSource="{Binding Headers}"
-                     ItemTemplate="{StaticResource MenuMaintenanceTemplate}"
-                     SelectedItem="{Binding Header}"
-                     Margin="5" />
+            <ListBox
+                Grid.Row="0"
+                Grid.Column="0"
+                Margin="5"
+                ItemTemplate="{StaticResource MenuMaintenanceTemplate}"
+                ItemsSource="{Binding Headers}"
+                SelectedItem="{Binding Header}" />
         </Grid>
-        <ListBox Grid.Column="1" Grid.Row="0"
-                 HorizontalContentAlignment="Stretch"
-                 ItemTemplate="{StaticResource MealTemplate}"
-                 ItemsSource="{Binding Meals}"
-                 Margin="5" />
-        <StackPanel Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Orientation="Horizontal"
-                    HorizontalAlignment="Right">
-            <Button Content="Save" Command="{Binding SaveData}" Margin="5" />
-            <Button Content="Cancel" Command="{Binding Cancel}" Margin="5" />
+        <ListBox
+            Grid.Row="0"
+            Grid.Column="1"
+            Margin="5"
+            HorizontalContentAlignment="Stretch"
+            ItemTemplate="{StaticResource MealTemplate}"
+            ItemsSource="{Binding Meals}" />
+        <StackPanel
+            Grid.Row="1"
+            Grid.Column="0"
+            Grid.ColumnSpan="2"
+            HorizontalAlignment="Right"
+            Orientation="Horizontal">
+            <Button
+                Margin="5"
+                Command="{Binding SaveData}"
+                Content="Save" />
+            <Button
+                Margin="5"
+                Command="{Binding Cancel}"
+                Content="Cancel" />
         </StackPanel>
     </Grid>
 </Window>

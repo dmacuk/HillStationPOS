@@ -38,6 +38,24 @@
     </xs:element>
   </xs:schema>
   <Table1>
+    <TableName>CUSTOMER</TableName>
+    <IsFilter>False</IsFilter>
+    <Filter />
+    <IsScope>False</IsScope>
+    <ScopeLow />
+    <ScopeHigh />
+    <IndexName>&lt;None&gt;</IndexName>
+    <FieldsOrder>0</FieldsOrder>
+    <IsFTS>False</IsFTS>
+    <ftsField />
+    <ftsPattern />
+    <recNo>0</recNo>
+    <findExpression />
+    <evalTest />
+    <defaultSettings>0</defaultSettings>
+    <selectedTab>0</selectedTab>
+  </Table1>
+  <Table1>
     <TableName>MEAL</TableName>
     <IsFilter>False</IsFilter>
     <Filter />
@@ -55,6 +73,10 @@
     <defaultSettings>0</defaultSettings>
     <selectedTab>0</selectedTab>
   </Table1>
+  <Table2>
+    <QueryColumn>
+select * from customer</QueryColumn>
+  </Table2>
   <Table2>
     <QueryColumn>select * from meal
 union all

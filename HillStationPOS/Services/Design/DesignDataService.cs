@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using HillStationPOS.Interfaces;
 using HillStationPOS.Model.Entities;
@@ -19,7 +20,12 @@ namespace HillStationPOS.Services.Design
 
         public Task<List<Customer>> LoadCustomersAsync()
         {
-            throw new System.NotImplementedException();
+            throw new NotImplementedException();
+        }
+
+        public Customer AddCustomer(Customer customer)
+        {
+            throw new NotImplementedException();
         }
     }
 }
