@@ -102,8 +102,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Constants\KeyConstants.cs" />
+    <Compile Include="Constants\PrefConstants.cs" />
     <Compile Include="Convertors\BoolToVisibilityConverter.cs" />
-    <Compile Include="Exceptions\DatabaseException.cs" />
     <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="Interfaces\IDataService.cs" />
     <Compile Include="Interfaces\IWindowService.cs" />
@@ -139,17 +140,31 @@
     <Compile Include="Services\Design\DesignDataService.cs" />
     <Compile Include="Services\Design\DesignWindowService.cs" />
     <Compile Include="Services\WindowService.cs" />
-    <Compile Include="Utilities\ConnectionFactory.cs" />
+    <Compile Include="Utilities\PasswordUtilities.cs" />
     <Compile Include="Utilities\PrintWorker.cs" />
     <Compile Include="ViewModel\CustomerPickerModel.cs" />
+    <Compile Include="Windows\MainMenu\MainMenuModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="ViewModel\MenuViewModel.cs" />
+    <Compile Include="Windows\Utilities\UtilitiesMenuModel.cs" />
     <Compile Include="ViewModel\ViewModelLocator.cs" />
+    <Compile Include="Windows\ChangePassword\ChangePasswordDialog.xaml.cs">
+      <DependentUpon>ChangePasswordDialog.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Windows\CutomerPickerWindow.xaml.cs">
       <DependentUpon>CutomerPickerWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Windows\MainMenu\MainMenuWindow.xaml.cs">
+      <DependentUpon>MainMenuWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Windows\MenuMaintenanceWindow.xaml.cs">
       <DependentUpon>MenuMaintenanceWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\Password\PasswordDialog.xaml.cs">
+      <DependentUpon>PasswordDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\Utilities\UtilitiesMenuDialog.xaml.cs">
+      <DependentUpon>UtilitiesMenuDialog.xaml</DependentUpon>
     </Compile>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -163,11 +178,27 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Windows\ChangePassword\ChangePasswordDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Windows\CutomerPickerWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Windows\MainMenu\MainMenuWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Windows\MenuMaintenanceWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\Password\PasswordDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\Utilities\UtilitiesMenuDialog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -233,9 +264,7 @@
       <LastGenOutput>HillStationModel.cs</LastGenOutput>
     </Content>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="SampleData\SampleDataSource\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <ProjectReference Include="..\..\Utils\Utils\Utils.csproj">
       <Project>{8d762aa6-63a4-4b17-a8c2-26d10ed6d7c9}</Project>

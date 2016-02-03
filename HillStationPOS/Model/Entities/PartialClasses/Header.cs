@@ -15,6 +15,7 @@ namespace HillStationPOS.Model.Entities
             DisplayOrder = header.DisplayOrder;
             foreach (var meal in header.Meals.OrderBy(m => m.DisplayOrder))
             {
+                // ReSharper disable once VirtualMemberCallInContructor
                 Meals.Add(new Meal(meal));
             }
         }

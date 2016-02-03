@@ -1,16 +1,18 @@
-﻿using GalaSoft.MvvmLight;
-using GalaSoft.MvvmLight.CommandWpf;
-using HillStationPOS.Model.Entities;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Windows.Input;
+using GalaSoft.MvvmLight;
+using GalaSoft.MvvmLight.CommandWpf;
+using HillStationPOS.Model.Entities;
 
 namespace HillStationPOS.Model
 {
     public class OrderItem : ObservableObject
     {
+        public delegate void OrderDeletedEventHandler(object sender, EventArgs e);
+
         private const string DescriptionPropertyName = "Description";
 
         private const string IdPropertyName = "Id";
@@ -18,8 +20,6 @@ namespace HillStationPOS.Model
         private const string NotesPropertyName = "Notes";
 
         private const string PricePropertyName = "Price";
-
-        private const string QuantityPropertyName = "Quantity";
 
         private readonly List<MealDetails> _meals = new List<MealDetails>();
 
@@ -31,77 +31,37 @@ namespace HillStationPOS.Model
 
         private string _notes;
 
-        private short _quantity;
-
-        public delegate void OrderDeletedEventHandler(object sender, EventArgs e);
-
-        public event OrderDeletedEventHandler OrderDeleted;
-
         public ICommand Delete => new RelayCommand(() => { OnOrderDeleted(null); });
 
         public string Description
         {
-            get
-            {
-                return _description;
-            }
-            set
-            {
-                Set(DescriptionPropertyName, ref _description, value);
-            }
+            get { return _description; }
+            set { Set(DescriptionPropertyName, ref _description, value); }
         }
 
         public int Id
         {
-            get
-            {
-                return _id;
-            }
-            private set
-            {
-                Set(IdPropertyName, ref _id, value);
-            }
+            get { return _id; }
+            private set { Set(IdPropertyName, ref _id, value); }
         }
 
         public string Notes
         {
-            get
-            {
-                return _notes;
-            }
-            set
-            {
-                Set(NotesPropertyName, ref _notes, value);
-            }
+            get { return _notes; }
+            set { Set(NotesPropertyName, ref _notes, value); }
         }
 
         public decimal Price
         {
-            get
-            {
-                return _myProperty;
-            }
-            set
-            {
-                Set(PricePropertyName, ref _myProperty, value);
-            }
+            get { return _myProperty; }
+            set { Set(PricePropertyName, ref _myProperty, value); }
         }
 
-        public short Quantity
-        {
-            get
-            {
-                return _quantity;
-            }
-            set
-            {
-                Set(QuantityPropertyName, ref _quantity, value);
-            }
-        }
+        public event OrderDeletedEventHandler OrderDeleted;
 
         public void AddMeal(int id, Meal meal, MealType mealType)
         {
-            _meals.Add(new MealDetails(id, meal, mealType));
+            _meals.Add(new MealDetails(meal, mealType));
             Price = _meals.Sum(m => m.GetPrice());
             Description = GetDescription();
             Id = id;
@@ -127,13 +87,11 @@ namespace HillStationPOS.Model
 
     internal class MealDetails
     {
-        private readonly int _id;
         private readonly Meal _meal;
         private readonly MealType _mealType;
 
-        public MealDetails(int id, Meal meal, MealType mealType)
+        public MealDetails(Meal meal, MealType mealType)
         {
-            _id = id;
             _meal = meal;
             _mealType = mealType;
         }

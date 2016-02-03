@@ -55,13 +55,12 @@ namespace HillStationPOS.ViewModel
                         new List<Customer>(
                             _allCustomers.Where(c => c.StrippedDetails.Contains(strippedValue)));
                 }
-                ;
             }
         }
 
-        private async void LoadCustomers()
+        private void LoadCustomers()
         {
-            _allCustomers.AddRange(await _dataService.LoadCustomersAsync());
+            _allCustomers.AddRange(_dataService.Customers);
             Customers = new List<Customer>(_allCustomers);
         }
 
@@ -76,7 +75,7 @@ namespace HillStationPOS.ViewModel
 
     internal static class CustomerBuilder
     {
-        private static readonly Random _random = new Random(DateTime.Now.Millisecond);
+        private static readonly Random Random = new Random(DateTime.Now.Millisecond);
         private static readonly string[] Names = {"David McCallum", "Charles McCallum", "Grant Butchart", "Arif Khan"};
 
         private static readonly string[] Addresses =
@@ -101,7 +100,7 @@ namespace HillStationPOS.ViewModel
 
         private static string RandomLine(string[] lines)
         {
-            return lines[_random.Next(lines.Length)];
+            return lines[Random.Next(lines.Length)];
         }
     }
 }

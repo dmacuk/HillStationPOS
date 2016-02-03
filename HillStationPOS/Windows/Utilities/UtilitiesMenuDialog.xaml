@@ -1,0 +1,39 @@
+﻿<Window x:Class="HillStationPOS.Windows.UtilitiesMenuDialog"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d"
+        DataContext="{Binding UtilitiesMenuModel, Source={StaticResource Locator}}"
+        x:Name="UtiitiesMenu"
+        WindowStartupLocation="CenterOwner"
+        Loaded="WindowLoaded"
+        Closing="WindowClosing"
+        Title="Utilities" Height="300" Width="450">
+    <Border Style="{StaticResource BorderStyle}">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <Button
+                Grid.Row="0"
+                Style="{StaticResource MenuButtonStyle}"
+                Command="{Binding UpdatemenuCommand}"
+                CommandParameter="{Binding ElementName=UtilitesMenu}"
+                Content="Update Menu"/>
+            <Button
+                Grid.Row="1"
+                Style="{StaticResource MenuButtonStyle}"
+                Command="{Binding ChangePasswordCommand}"
+                CommandParameter="{Binding ElementName=UtilitesMenu}"
+                Content="Change Password"/>
+            <Button
+                Grid.Row="2"
+                Style="{StaticResource MenuButtonStyle}"
+                Click="ExitProgram"
+                Content="Exit"/>
+        </Grid>
+    </Border>
+</Window>

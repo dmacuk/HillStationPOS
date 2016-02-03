@@ -36,7 +36,6 @@ namespace HillStationPOS.ViewModel
         private readonly IWindowService _windowService;
 
         private string _address;
-        private List<Customer> _customers;
 
         private Header _header;
 
@@ -177,10 +176,9 @@ namespace HillStationPOS.ViewModel
         ////    // Clean up if needed
         ////{
         ////public override void Cleanup()
-        public async void LoadData()
+        private void LoadData()
         {
-            _customers = await _dataService.LoadCustomersAsync();
-            var headers = await _dataService.LoadMenuAsync();
+            var headers = _dataService.Headers;
             Headers = new List<Header>(headers);
             if (headers.Count > 0)
             {

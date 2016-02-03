@@ -24,7 +24,6 @@ namespace HillStationPOS
         private void WindowLoaded(object sender, RoutedEventArgs e)
         {
             _model = (MainViewModel) DataContext;
-            _model.LoadData();
             _model.OrderItemAdded += OrderItemAdded;
 
             this.LoadSettings(false);

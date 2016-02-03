@@ -50,9 +50,10 @@
         <DataTemplate x:Key="MealTemplate" DataType="entities:Meal">
             <Border Style="{StaticResource BorderStyle}">
                 <StackPanel>
-                    <TextBlock Style="{StaticResource CaptionStyle}"
-                               FontSize="24"
-                               Text="{Binding Title}" />
+                    <TextBlock
+                        Style="{StaticResource CaptionStyle}"
+                        FontSize="24"
+                        Text="{Binding Title}" />
                     <Grid>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*" />
@@ -70,8 +71,7 @@
                             Visibility="{Binding PriceVisible}">
                             <StackPanel>
                                 <TextBlock Style="{StaticResource PriceButtonText}" Text="Price" />
-                                <TextBlock Style="{StaticResource PriceButtonText}"
-                                           Text="{Binding Price, StringFormat=N2}" />
+                                <TextBlock Style="{StaticResource PriceButtonText}" Text="{Binding Price, StringFormat=N2}" />
                             </StackPanel>
                         </Button>
                         <Button
@@ -82,8 +82,7 @@
                             Visibility="{Binding ChickenVisible}">
                             <StackPanel>
                                 <TextBlock Style="{StaticResource PriceButtonText}" Text="Chicken" />
-                                <TextBlock Style="{StaticResource PriceButtonText}"
-                                           Text="{Binding ChickenPrice, StringFormat=N2}" />
+                                <TextBlock Style="{StaticResource PriceButtonText}" Text="{Binding ChickenPrice, StringFormat=N2}" />
                             </StackPanel>
                         </Button>
                         <Button
@@ -94,8 +93,7 @@
                             Visibility="{Binding LambVisible}">
                             <StackPanel>
                                 <TextBlock Style="{StaticResource PriceButtonText}" Text="Lamb" />
-                                <TextBlock Style="{StaticResource PriceButtonText}"
-                                           Text="{Binding LambPrice, StringFormat=N2}" />
+                                <TextBlock Style="{StaticResource PriceButtonText}" Text="{Binding LambPrice, StringFormat=N2}" />
                             </StackPanel>
                         </Button>
                         <Button
@@ -106,8 +104,7 @@
                             Visibility="{Binding VegetableVisible}">
                             <StackPanel>
                                 <TextBlock Style="{StaticResource PriceButtonText}" Text="Vegetable" />
-                                <TextBlock Style="{StaticResource PriceButtonText}"
-                                           Text="{Binding VegetablePrice, StringFormat=N2}" />
+                                <TextBlock Style="{StaticResource PriceButtonText}" Text="{Binding VegetablePrice, StringFormat=N2}" />
                             </StackPanel>
                         </Button>
                         <Button
@@ -118,8 +115,7 @@
                             Visibility="{Binding PrawnVisible}">
                             <StackPanel>
                                 <TextBlock Style="{StaticResource PriceButtonText}" Text="Prawn" />
-                                <TextBlock Style="{StaticResource PriceButtonText}"
-                                           Text="{Binding PrawnPrice, StringFormat=N2}" />
+                                <TextBlock Style="{StaticResource PriceButtonText}" Text="{Binding PrawnPrice, StringFormat=N2}" />
                             </StackPanel>
                         </Button>
                         <Button
@@ -130,8 +126,7 @@
                             Visibility="{Binding KingPrawnVisible}">
                             <StackPanel>
                                 <TextBlock Style="{StaticResource PriceButtonText}" Text="King Prawn" />
-                                <TextBlock Style="{StaticResource PriceButtonText}"
-                                           Text="{Binding KingPrawnPrice, StringFormat=N2}" />
+                                <TextBlock Style="{StaticResource PriceButtonText}" Text="{Binding KingPrawnPrice, StringFormat=N2}" />
                             </StackPanel>
                         </Button>
                     </Grid>
@@ -199,25 +194,62 @@
                                     <ColumnDefinition Width="*" />
                                     <ColumnDefinition Width="Auto" />
                                 </Grid.ColumnDefinitions>
-                                <TextBlock Grid.Row="0" Grid.Column="0" Text="No."
-                                           Style="{StaticResource CaptionStyle}" />
-                                <TextBlock Grid.Row="1" Grid.Column="0" Text="Addr."
-                                           Style="{StaticResource CaptionStyle}" />
-                                <TextBlock Grid.Row="0" Grid.Column="1" Text="{Binding OrderNumber}" Margin="5" />
-                                <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding Address}" MinLines="4"
-                                         TextWrapping="Wrap" AcceptsReturn="True" MaxLines="4" />
-                                <Button Content="Add" Grid.Row="1" Grid.Column="2" HorizontalAlignment="Center"
-                                        VerticalAlignment="Top" Margin="5" />
-                                <StackPanel Orientation="Horizontal" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="3">
+                                <TextBlock
+                                    Grid.Row="0"
+                                    Grid.Column="0"
+                                    Style="{StaticResource CaptionStyle}"
+                                    Text="No." />
+                                <TextBlock
+                                    Grid.Row="1"
+                                    Grid.Column="0"
+                                    Style="{StaticResource CaptionStyle}"
+                                    Text="Addr." />
+                                <TextBlock
+                                    Grid.Row="0"
+                                    Grid.Column="1"
+                                    Margin="5"
+                                    Text="{Binding OrderNumber}" />
+                                <TextBox
+                                    Grid.Row="1"
+                                    Grid.Column="1"
+                                    AcceptsReturn="True"
+                                    MaxLines="4"
+                                    MinLines="4"
+                                    Text="{Binding Address}"
+                                    TextWrapping="Wrap" />
+                                <Button
+                                    Grid.Row="1"
+                                    Grid.Column="2"
+                                    Margin="5"
+                                    HorizontalAlignment="Center"
+                                    VerticalAlignment="Top"
+                                    Content="Add" />
+                                <StackPanel
+                                    Grid.Row="2"
+                                    Grid.Column="0"
+                                    Grid.ColumnSpan="3"
+                                    Orientation="Horizontal">
                                     <TextBlock Style="{StaticResource CaptionStyle}" Text="Card" />
-                                    <TextBox Margin="5" HorizontalAlignment="Center" Text="1234-1234-1234-1234"
-                                             MinWidth="130" />
-                                    <TextBlock Text="Expire" Style="{StaticResource CaptionStyle}" />
-                                    <TextBox Margin="5" Text="1234" MinWidth="35" />
-                                    <TextBlock Text="CVV" Style="{StaticResource CaptionStyle}" />
-                                    <TextBox Margin="5" Text="123" MinWidth="30" />
-                                    <TextBlock Text="Post" Style="{StaticResource CaptionStyle}" />
-                                    <TextBox Margin="5" Text="105 10" MinWidth="45" />
+                                    <TextBox
+                                        MinWidth="130"
+                                        Margin="5"
+                                        HorizontalAlignment="Center"
+                                        Text="1234-1234-1234-1234" />
+                                    <TextBlock Style="{StaticResource CaptionStyle}" Text="Expire" />
+                                    <TextBox
+                                        MinWidth="35"
+                                        Margin="5"
+                                        Text="1234" />
+                                    <TextBlock Style="{StaticResource CaptionStyle}" Text="CVV" />
+                                    <TextBox
+                                        MinWidth="30"
+                                        Margin="5"
+                                        Text="123" />
+                                    <TextBlock Style="{StaticResource CaptionStyle}" Text="Post" />
+                                    <TextBox
+                                        MinWidth="45"
+                                        Margin="5"
+                                        Text="105 10" />
                                 </StackPanel>
                             </Grid>
                         </Border>
@@ -226,6 +258,7 @@
                                 x:Name="OrderGrid"
                                 HorizontalContentAlignment="Stretch"
                                 AutoGenerateColumns="False"
+                                CanUserAddRows="False"
                                 CanUserDeleteRows="False"
                                 CanUserReorderColumns="False"
                                 CanUserResizeColumns="False"
@@ -263,8 +296,7 @@
                                         <DataGridTemplateColumn.CellTemplate>
                                             <DataTemplate DataType="model:OrderItem">
                                                 <TextBlock VerticalAlignment="Center">
-                                                    <Hyperlink Style="{StaticResource HyperlinkStyle}"
-                                                               Command="{Binding Delete}">
+                                                    <Hyperlink Style="{StaticResource HyperlinkStyle}" Command="{Binding Delete}">
                                                         <Image
                                                             x:Name="ImageDelete"
                                                             Width="40"

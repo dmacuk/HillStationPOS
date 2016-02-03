@@ -9,38 +9,10 @@ namespace HillStationPOS.Services
     // ReSharper disable once ClassNeverInstantiated.Global
     internal class DataService : IDataService
     {
-        public string GetSetMealIdentifier()
-        {
-            return "Set Meal";
-        }
-
-        public async Task<List<Header>> LoadMenuAsync()
-        {
-            return await Task.Factory.StartNew(() =>
-            {
-                var result = new List<Header>();
-                using (var entities = new HillStationEntities())
-                {
-                    result.AddRange(
-                        entities.Headers.OrderBy(h => h.DisplayOrder).ToList().Select(header => new Header(header)));
-                }
-                return result;
-            });
-        }
-
-        public async Task<List<Customer>> LoadCustomersAsync()
-        {
-            return await Task.Factory.StartNew(() =>
-            {
-                var result = new List<Customer>();
-                using (var entities = new HillStationEntities())
-                {
-                    result.AddRange(
-                        entities.Customers.OrderBy(c => c.Details));
-                }
-                return result;
-            });
-        }
+        private static DataService _instance;
+        public static DataService Instance => _instance ?? (_instance = new DataService());
+        public List<Customer> Customers { get; set; }
+        public List<Header> Headers { get; set; }
 
         public Customer AddCustomer(Customer customer)
         {
@@ -51,6 +23,21 @@ namespace HillStationPOS.Services
                 entities.Entry(customer).Reload();
                 return customer;
             }
+        }
+
+        public Task<bool> Initialise()
+        {
+            return Task.Factory.StartNew(() =>
+            {
+                using (var entities = new HillStationEntities())
+                {
+                    Headers =
+                        new List<Header>(
+                            entities.Headers.OrderBy(h => h.DisplayOrder).ToList().Select(header => new Header(header)));
+                    Customers = new List<Customer>(entities.Customers.OrderBy(c => c.Details));
+                }
+                return true;
+            });
         }
     }
 }

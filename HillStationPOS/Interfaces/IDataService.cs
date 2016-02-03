@@ -1,14 +1,14 @@
-﻿using System.Collections.Generic;
-using System.Threading.Tasks;
-using HillStationPOS.Model.Entities;
+﻿using HillStationPOS.Model.Entities;
+using System.Collections.Generic;
 
 namespace HillStationPOS.Interfaces
 {
     public interface IDataService
     {
-        string GetSetMealIdentifier();
-        Task<List<Header>> LoadMenuAsync();
-        Task<List<Customer>> LoadCustomersAsync();
+        List<Customer> Customers { get; set; }
+
+        List<Header> Headers { get; set; }
+
         Customer AddCustomer(Customer customer);
     }
 }
