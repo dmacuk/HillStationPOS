@@ -9,8 +9,11 @@
           <Key>
             <PropertyRef Name="id" />
           </Key>
-          <Property Name="id" Type="int" Nullable="false" />
-          <Property Name="details" Type="text" Nullable="false" />
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="text" />
+          <Property Name="address" Type="text" />
+          <Property Name="postcode" Type="text" />
+          <Property Name="phone" Type="text" />
         </EntityType>
         <EntityType Name="Header">
           <Key>
@@ -113,7 +116,10 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" />
-          <Property Name="Details" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Address" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Postcode" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Phone" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -150,7 +156,10 @@
           <EntitySetMapping Name="Customers1">
             <EntityTypeMapping TypeName="HillStationModel.Customer">
               <MappingFragment StoreEntitySet="customer">
-                <ScalarProperty Name="Details" ColumnName="details" />
+                <ScalarProperty Name="Phone" ColumnName="phone" />
+                <ScalarProperty Name="Postcode" ColumnName="postcode" />
+                <ScalarProperty Name="Address" ColumnName="address" />
+                <ScalarProperty Name="Name" ColumnName="name" />
                 <ScalarProperty Name="Id" ColumnName="id" />
               </MappingFragment>
             </EntityTypeMapping>

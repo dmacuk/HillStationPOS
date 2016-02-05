@@ -18,11 +18,17 @@ namespace HillStationPOS.Windows.Utilities
 
         public ICommand ChangePasswordCommand => new RelayCommand<Window>(ChangePassword);
 
+        public ICommand MaintainCustomersCommand => new RelayCommand<Window>(MaintainCustomers);
         public ICommand UpdatemenuCommand => new RelayCommand<Window>(UpdateMenu);
 
         private void ChangePassword(Window owner)
         {
             _windowService.ChangePassword(owner);
+        }
+
+        private void MaintainCustomers(Window owner)
+        {
+            _windowService.MaintainCustomers(owner);
         }
 
         private void UpdateMenu(Window window)

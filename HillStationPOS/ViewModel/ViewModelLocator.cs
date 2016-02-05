@@ -4,7 +4,7 @@
       <vm:ViewModelLocatorTemplate xmlns:vm="clr-namespace:HillStationPOS.ViewModel"
                                    x:Key="Locator" />
   </Application.Resources>
-  
+
   In the View:
   DataContext="{Binding Source={StaticResource Locator}, Path=ViewModelName}"
 */
@@ -15,6 +15,7 @@ using HillStationPOS.Interfaces;
 using HillStationPOS.Services;
 using HillStationPOS.Services.Design;
 using HillStationPOS.Windows.MainMenu;
+using HillStationPOS.Windows.MaintainCustomers;
 using HillStationPOS.Windows.Utilities;
 using Microsoft.Practices.ServiceLocation;
 
@@ -49,7 +50,22 @@ namespace HillStationPOS.ViewModel
             SimpleIoc.Default.Register<CustomerPickerModel>();
             SimpleIoc.Default.Register<MainMenuModel>();
             SimpleIoc.Default.Register<UtilitiesMenuModel>();
+            SimpleIoc.Default.Register<MaintainCustomersModel>();
         }
+
+        // ReSharper disable MemberCanBeMadeStatic.Global
+        public CustomerPickerModel Customers => ServiceLocator.Current.GetInstance<CustomerPickerModel>();
+
+        public MainViewModel Main => ServiceLocator.Current.GetInstance<MainViewModel>();
+
+        public MainMenuModel MainMenuModel => ServiceLocator.Current.GetInstance<MainMenuModel>();
+
+        public MaintainCustomersModel MaintainCustomersModel
+            => ServiceLocator.Current.GetInstance<MaintainCustomersModel>();
+
+        public MenuViewModel Menu => ServiceLocator.Current.GetInstance<MenuViewModel>();
+
+        public UtilitiesMenuModel UtilitiesMenuModel => ServiceLocator.Current.GetInstance<UtilitiesMenuModel>();
 
         /// <summary>
         ///     Cleans up all the resources.
@@ -57,16 +73,6 @@ namespace HillStationPOS.ViewModel
         public static void Cleanup()
         {
         }
-
-        // ReSharper disable MemberCanBeMadeStatic.Global
-        public MainViewModel Main => ServiceLocator.Current.GetInstance<MainViewModel>();
-
-        public MenuViewModel Menu => ServiceLocator.Current.GetInstance<MenuViewModel>();
-        public CustomerPickerModel Customers => ServiceLocator.Current.GetInstance<CustomerPickerModel>();
-
-        public MainMenuModel MainMenuModel => ServiceLocator.Current.GetInstance<MainMenuModel>();
-
-        public UtilitiesMenuModel UtilitiesMenuModel => ServiceLocator.Current.GetInstance<UtilitiesMenuModel>();
 
         // ReSharper restore MemberCanBeMadeStatic.Global
     }

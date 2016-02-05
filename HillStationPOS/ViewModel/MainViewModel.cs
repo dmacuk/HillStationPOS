@@ -172,6 +172,17 @@ namespace HillStationPOS.ViewModel
 
         ////}
 
+        protected virtual void OnOrderItemAdded(OrderItemAddedEventArgs e)
+        {
+            OrderItemAdded?.Invoke(this, e);
+        }
+
+        private void DeleteOrderItem(object sender, EventArgs e)
+        {
+            var item = (OrderItem) sender;
+            OrderItems.Remove(item);
+        }
+
         ////    base.Cleanup();
         ////    // Clean up if needed
         ////{
@@ -184,17 +195,6 @@ namespace HillStationPOS.ViewModel
             {
                 Header = headers[0];
             }
-        }
-
-        protected virtual void OnOrderItemAdded(OrderItemAddedEventArgs e)
-        {
-            OrderItemAdded?.Invoke(this, e);
-        }
-
-        private void DeleteOrderItem(object sender, EventArgs e)
-        {
-            var item = (OrderItem) sender;
-            OrderItems.Remove(item);
         }
 
         private void MealAdded(object sender, MealAddedEventArgs e)

@@ -1,7 +1,5 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using GalaSoft.MvvmLight;
 using HillStationPOS.Interfaces;
 using HillStationPOS.Model.Entities;
@@ -20,12 +18,12 @@ namespace HillStationPOS.ViewModel
         public CustomerPickerModel()
         {
             _dataService = new DataService();
-            _allCustomers = new List<Customer>();
+            _allCustomers = _dataService.Customers;
             if (IsInDesignMode)
             {
                 for (var i = 0; i < 10; i++)
                 {
-                    _allCustomers.Add(new Customer {Details = CustomerBuilder.BuildCustomer()});
+                    //                    _allCustomers.Add(new Customer {Details = CustomerBuilder.BuildCustomer()});
                 }
                 _allCustomers.Sort();
                 Customers = new List<Customer>(_allCustomers);
@@ -35,13 +33,6 @@ namespace HillStationPOS.ViewModel
                 LoadCustomers();
             }
         }
-
-        public List<Customer> Customers
-        {
-            get { return _customers; }
-            set { Set("Customers", ref _customers, value); }
-        }
-
 
         public string Address
         {
@@ -58,10 +49,10 @@ namespace HillStationPOS.ViewModel
             }
         }
 
-        private void LoadCustomers()
+        public List<Customer> Customers
         {
-            _allCustomers.AddRange(_dataService.Customers);
-            Customers = new List<Customer>(_allCustomers);
+            get { return _customers; }
+            set { Set("Customers", ref _customers, value); }
         }
 
         public Customer Add(Customer customer)
@@ -71,36 +62,11 @@ namespace HillStationPOS.ViewModel
             _allCustomers.Sort();
             return added;
         }
-    }
 
-    internal static class CustomerBuilder
-    {
-        private static readonly Random Random = new Random(DateTime.Now.Millisecond);
-        private static readonly string[] Names = {"David McCallum", "Charles McCallum", "Grant Butchart", "Arif Khan"};
-
-        private static readonly string[] Addresses =
+        private void LoadCustomers()
         {
-            "10 Bingham Broadway", "40 Balfour Street", "49 Canaan Lane",
-            "101 Comiston Road"
-        };
-
-        private static readonly string[] PostCodes = {"EH15 3JL", "EH7 9XX", "EH10 7YY", "EH10 6ZZ"};
-        private static readonly string[] PhoneNumbers = {"07757 438 032", "0131 620 2968", "999 9999", "123 4567"};
-
-
-        public static string BuildCustomer()
-        {
-            var customer = new StringBuilder();
-            customer.Append(RandomLine(Names)).Append(Environment.NewLine);
-            customer.Append(RandomLine(Addresses)).Append(Environment.NewLine);
-            customer.Append(RandomLine(PostCodes)).Append(Environment.NewLine);
-            customer.Append(RandomLine(PhoneNumbers));
-            return customer.ToString();
-        }
-
-        private static string RandomLine(string[] lines)
-        {
-            return lines[Random.Next(lines.Length)];
+            _allCustomers.AddRange(_dataService.Customers);
+            Customers = new List<Customer>(_allCustomers);
         }
     }
 }

@@ -1,5 +1,5 @@
-﻿using HillStationPOS.Model.Entities;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using HillStationPOS.Model.Entities;
 
 namespace HillStationPOS.Interfaces
 {
@@ -10,5 +10,9 @@ namespace HillStationPOS.Interfaces
         List<Header> Headers { get; set; }
 
         Customer AddCustomer(Customer customer);
+
+        void RemoveCustomer(Customer customer);
+
+        void UpdateCustomer(Customer customer);
     }
 }

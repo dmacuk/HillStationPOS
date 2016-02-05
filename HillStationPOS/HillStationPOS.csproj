@@ -140,12 +140,24 @@
     <Compile Include="Services\Design\DesignDataService.cs" />
     <Compile Include="Services\Design\DesignWindowService.cs" />
     <Compile Include="Services\WindowService.cs" />
+    <Compile Include="UserControls\CustomerListEventArgs.cs" />
+    <Compile Include="UserControls\CustomerListModel.cs" />
+    <Compile Include="UserControls\CustomerListUserControl.xaml.cs">
+      <DependentUpon>CustomerListUserControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\ListTest.xaml.cs">
+      <DependentUpon>ListTest.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Utilities\PasswordUtilities.cs" />
     <Compile Include="Utilities\PrintWorker.cs" />
     <Compile Include="ViewModel\CustomerPickerModel.cs" />
     <Compile Include="Windows\MainMenu\MainMenuModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="ViewModel\MenuViewModel.cs" />
+    <Compile Include="Windows\MaintainCustomers\MaintainCustomersDialog.xaml.cs">
+      <DependentUpon>MaintainCustomersDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\MaintainCustomers\MaintainCustomersModel.cs" />
     <Compile Include="Windows\Utilities\UtilitiesMenuModel.cs" />
     <Compile Include="ViewModel\ViewModelLocator.cs" />
     <Compile Include="Windows\ChangePassword\ChangePasswordDialog.xaml.cs">
@@ -178,6 +190,14 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="UserControls\CustomerListUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControls\ListTest.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Windows\ChangePassword\ChangePasswordDialog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -187,6 +207,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Windows\MainMenu\MainMenuWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\MaintainCustomers\MaintainCustomersDialog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

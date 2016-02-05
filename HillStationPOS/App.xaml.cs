@@ -1,6 +1,6 @@
-﻿using System.Windows;
+﻿using GalaSoft.MvvmLight.Threading;
+using System.Windows;
 using System.Windows.Threading;
-using GalaSoft.MvvmLight.Threading;
 using Utils.Preference;
 
 namespace HillStationPOS
@@ -15,16 +15,16 @@ namespace HillStationPOS
             DispatcherHelper.Initialize();
         }
 
-        protected override void OnStartup(StartupEventArgs e)
-        {
-            PreferenceManager.GetInstance("Orders.prefs");
-            base.OnStartup(e);
-        }
-
         protected override void OnExit(ExitEventArgs e)
         {
             PreferenceManager.SavePreferences();
             base.OnExit(e);
+        }
+
+        protected override void OnStartup(StartupEventArgs e)
+        {
+            PreferenceManager.GetInstance("Orders.prefs");
+            base.OnStartup(e);
         }
 
         private void UnHandledException(object sender, DispatcherUnhandledExceptionEventArgs e)

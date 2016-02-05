@@ -1,12 +1,12 @@
-﻿using System.Collections.Generic;
+﻿using HillStationPOS.ViewModel;
+using Spire.Pdf;
+using Syncfusion.ReportWriter;
+using Syncfusion.Windows.Reports;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing.Printing;
 using System.IO;
 using System.Reflection;
-using HillStationPOS.ViewModel;
-using Spire.Pdf;
-using Syncfusion.ReportWriter;
-using Syncfusion.Windows.Reports;
 
 namespace HillStationPOS.Utilities
 {
@@ -17,9 +17,9 @@ namespace HillStationPOS.Utilities
             var reportStream =
                 Assembly.GetExecutingAssembly().GetManifestResourceStream("HillStationPOS.Reports.Order.rdlc");
 
-            var writer = new ReportWriter {ReportProcessingMode = ProcessingMode.Local};
+            var writer = new ReportWriter { ReportProcessingMode = ProcessingMode.Local };
             writer.DataSources.Clear();
-            writer.DataSources.Add(new ReportDataSource {Name = "OrderItems", Value = model.OrderItems});
+            writer.DataSources.Add(new ReportDataSource { Name = "OrderItems", Value = model.OrderItems });
             writer.LoadReport(reportStream);
 
             var parameters = new List<ReportParameter>();
@@ -35,9 +35,11 @@ namespace HillStationPOS.Utilities
                     case "OrderNumber":
                         param.Values.Add(model.OrderNumber);
                         break;
+
                     case "Address":
                         param.Values.Add(model.Address);
                         break;
+
                     default:
                         throw new InvalidEnumArgumentException(@"Invalid parameter name: " + param.Name);
                 }
@@ -53,9 +55,9 @@ namespace HillStationPOS.Utilities
             var pdf = new PdfDocument(stream);
 
             var size = pdf.Pages[0].Size;
-            var paper = new PaperSize("Custom", (int) size.Width, (int) size.Height)
+            var paper = new PaperSize("Custom", (int)size.Width, (int)size.Height)
             {
-                RawKind = (int) PaperKind.Custom
+                RawKind = (int)PaperKind.Custom
             };
             pdf.PageScaling = PdfPrintPageScaling.ActualSize;
             var printDocument = pdf.PrintDocument;

@@ -2,12 +2,12 @@
 using System.Windows;
 using Utils.Window;
 
-namespace HillStationPOS.Windows
+namespace HillStationPOS.Windows.Utilities
 {
     /// <summary>
-    /// Interaction logic for UtilitiesMenuDialog.xaml
+    ///     Interaction logic for UtilitiesMenuDialog.xaml
     /// </summary>
-    public partial class UtilitiesMenuDialog : Window
+    public partial class UtilitiesMenuDialog
     {
         public UtilitiesMenuDialog()
         {
@@ -19,14 +19,14 @@ namespace HillStationPOS.Windows
             Close();
         }
 
-        private void WindowLoaded(object sender, RoutedEventArgs e)
-        {
-            this.LoadSettings(false);
-        }
-
         private void WindowClosing(object sender, CancelEventArgs e)
         {
             this.SaveSettings(false);
+        }
+
+        private void WindowLoaded(object sender, RoutedEventArgs e)
+        {
+            this.LoadSettings(false);
         }
     }
 }

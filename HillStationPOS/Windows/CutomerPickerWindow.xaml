@@ -53,6 +53,5 @@
                 ItemsSource="{Binding Customers}"
                 MouseDoubleClick="SelectCustomer" />
         </Border>
-
     </Grid>
 </Window>

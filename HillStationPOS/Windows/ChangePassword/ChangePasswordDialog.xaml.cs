@@ -1,4 +1,5 @@
 ﻿using System.Windows;
+using System.Windows.Controls;
 using HillStationPOS.Utilities;
 
 namespace HillStationPOS.Windows.ChangePassword
@@ -19,13 +20,20 @@ namespace HillStationPOS.Windows.ChangePassword
             var oldPassword = TextOldPassword.Password;
             var newPassword = TextNewPassword.Password;
             var newPasswordRepeat = TextNewPasswordRepeat.Password;
-            if (savedPassword != oldPassword || string.IsNullOrWhiteSpace(newPassword) || newPassword != newPasswordRepeat)
+            if (savedPassword != oldPassword || string.IsNullOrWhiteSpace(newPassword) ||
+                newPassword != newPasswordRepeat)
             {
                 MessageBox.Show("Either the old password is wrong, or the new password entries do not match");
                 return;
             }
             PasswordUtilities.SetPassword(newPassword);
-            if (Owner != null) DialogResult = true;
+            DialogResult = true;
+        }
+
+        private void PasswordGotFocus(object sender, RoutedEventArgs e)
+        {
+            var passwordBox = (PasswordBox) sender;
+            passwordBox.SelectAll();
         }
     }
 }

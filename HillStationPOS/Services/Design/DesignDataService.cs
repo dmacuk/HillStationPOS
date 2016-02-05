@@ -11,39 +11,68 @@ namespace HillStationPOS.Services.Design
         // ReSharper disable once EmptyConstructor
         public DesignDataService()
         {
-//            var orderItem = new OrderItem
-//            {
-//                Description = "Meal Description",
-//                Price = 10.95M,
-//                Notes = "These are meal notes"
-//            };
-//            OrderItems.Add(orderItem);
-//
-//            var header = new Header { Title = "Starters" };
-//            Headers.Add(header);
-//
-//            var meal = new Meal
-//            {
-//                Price = 5m,
-//                ChickenPrice = 5m,
-//                KingPrawnPrice = 5m,
-//                LambPrice = 5m,
-//                PrawnPrice = 5m,
-//                VegetablePrice = 5m,
-//                Title = "This is a meal"
-//            };
-//            Meals.Add(meal);
-//            OrderNumber = "A0001";
-//            Address = "David McCallum" + Environment.NewLine + "10 Bingham Broadway" + Environment.NewLine +
-//                      "EH15 3JL" + Environment.NewLine + "07757 438 032";
         }
 
-        public List<Customer> Customers { get; set; }
+        public List<Customer> Customers
+        {
+            get
+            {
+                var customers = new List<Customer>();
+                for (var i = 0; i < 10; i++)
+                {
+                    customers.Add(CustomerBuilder.BuildCustomer());
+                }
+                customers.Sort();
+                return customers;
+            }
+            set { throw new NotImplementedException(); }
+        }
+
         public List<Header> Headers { get; set; }
 
         public Customer AddCustomer(Customer customer)
         {
             throw new NotImplementedException();
+        }
+
+        public void RemoveCustomer(Customer customer)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void UpdateCustomer(Customer customer)
+        {
+            throw new NotImplementedException();
+        }
+    }
+
+    internal static class CustomerBuilder
+    {
+        private static readonly string[] Addresses =
+        {
+            "10 Bingham Broadway", "40 Balfour Street", "49 Canaan Lane",
+            "101 Comiston Road"
+        };
+
+        private static readonly string[] Names = {"David McCallum", "Charles McCallum", "Grant Butchart", "Arif Khan"};
+        private static readonly string[] PhoneNumbers = {"07757 438 032", "0131 620 2968", "999 9999", "123 4567"};
+        private static readonly string[] PostCodes = {"EH15 3JL", "EH7 9XX", "EH10 7YY", "EH10 6ZZ"};
+        private static readonly Random Random = new Random(DateTime.Now.Millisecond);
+
+        public static Customer BuildCustomer()
+        {
+            return new Customer
+            {
+                Name = RandomLine(Names),
+                Address = RandomLine(Addresses),
+                Postcode = RandomLine(PostCodes),
+                Phone = RandomLine(PhoneNumbers)
+            };
+        }
+
+        private static string RandomLine(string[] lines)
+        {
+            return lines[Random.Next(lines.Length)];
         }
     }
 }

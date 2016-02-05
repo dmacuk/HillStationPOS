@@ -1,0 +1,40 @@
+﻿<UserControl
+    x:Class="HillStationPOS.UserControls.CustomerListUserControl"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:entities="clr-namespace:HillStationPOS.Model.Entities"
+    xmlns:local="clr-namespace:HillStationPOS.UserControls"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    d:DataContext="{d:DesignInstance local:CustomerListModel}"
+    d:DesignHeight="300"
+    d:DesignWidth="300"
+    mc:Ignorable="d"
+    Loaded="ControlLoaded">
+    <UserControl.Resources>
+        <DataTemplate x:Key="CustomerTemplate" DataType="entities:Customer">
+            <Border Padding="5" Style="{StaticResource BorderStyle}">
+                <StackPanel>
+                    <TextBlock Text="{Binding Name}" />
+                    <TextBlock Text="{Binding Address}" />
+                    <TextBlock Text="{Binding Postcode}" />
+                    <TextBlock Text="{Binding Phone}" />
+                </StackPanel>
+            </Border>
+        </DataTemplate>
+    </UserControl.Resources>
+    <Border Style="{StaticResource BorderStyle}">
+        <DockPanel>
+            <Border Style="{StaticResource BorderStyle}" DockPanel.Dock="Top">
+                <TextBox Text="{Binding Filter, UpdateSourceTrigger=PropertyChanged}" />
+            </Border>
+            <Border Style="{StaticResource BorderStyle}">
+                <ListBox
+                    HorizontalContentAlignment="Stretch"
+                    IsSynchronizedWithCurrentItem="True"
+                    ItemTemplate="{StaticResource CustomerTemplate}"
+                    ItemsSource="{Binding Customers}" />
+            </Border>
+        </DockPanel>
+    </Border>
+</UserControl>

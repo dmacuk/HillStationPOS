@@ -9,12 +9,24 @@ using HillStationPOS.Model.Entities;
 
 namespace HillStationPOS.ViewModel
 {
+    public enum UpdateOperation
+    {
+        Updated,
+        Cancelled
+    }
+
+    public class MenuUpdatedEventArgs : EventArgs
+    {
+        public UpdateOperation UpdateOperation { get; set; }
+    }
+
     // ReSharper disable once ClassNeverInstantiated.Global
     public class MenuViewModel : ViewModelBase
     {
         public delegate void MenuUdateEventHandler(object sender, MenuUpdatedEventArgs e);
 
         private Header _header;
+
         private List<Meal> _meals;
 
         public MenuViewModel()
@@ -66,23 +78,11 @@ namespace HillStationPOS.ViewModel
             set { Set("Meals", ref _meals, value); }
         }
 
-        private void Save()
+        public event MenuUdateEventHandler MenuUpdated;
+
+        protected virtual void OnMenuOpdated(MenuUpdatedEventArgs e)
         {
-            using (var entities = new HillStationEntities())
-            {
-                foreach (var header in Headers)
-                {
-                    entities.Headers.Attach(header);
-                    entities.Entry(header).State = EntityState.Modified;
-                    foreach (var meal in header.Meals)
-                    {
-                        entities.Meals.Attach(meal);
-                        entities.Entry(meal).State = EntityState.Modified;
-                    }
-                }
-                entities.SaveChanges();
-                OnMenuOpdated(new MenuUpdatedEventArgs {UpdateOperation = UpdateOperation.Updated});
-            }
+            MenuUpdated?.Invoke(this, e);
         }
 
         private void AdjustPrice(string priceType, decimal amount)
@@ -134,11 +134,23 @@ namespace HillStationPOS.ViewModel
             }
         }
 
-        public event MenuUdateEventHandler MenuUpdated;
-
-        protected virtual void OnMenuOpdated(MenuUpdatedEventArgs e)
+        private void Save()
         {
-            MenuUpdated?.Invoke(this, e);
+            using (var entities = new HillStationEntities())
+            {
+                foreach (var header in Headers)
+                {
+                    entities.Headers.Attach(header);
+                    entities.Entry(header).State = EntityState.Modified;
+                    foreach (var meal in header.Meals)
+                    {
+                        entities.Meals.Attach(meal);
+                        entities.Entry(meal).State = EntityState.Modified;
+                    }
+                }
+                entities.SaveChanges();
+                OnMenuOpdated(new MenuUpdatedEventArgs {UpdateOperation = UpdateOperation.Updated});
+            }
         }
 
         #region Commands
@@ -149,16 +161,5 @@ namespace HillStationPOS.ViewModel
         public ICommand SaveData { get; set; }
 
         #endregion Commands
-    }
-
-    public class MenuUpdatedEventArgs : EventArgs
-    {
-        public UpdateOperation UpdateOperation { get; set; }
-    }
-
-    public enum UpdateOperation
-    {
-        Updated,
-        Cancelled
     }
 }

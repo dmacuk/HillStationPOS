@@ -7,10 +7,9 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:vm="clr-namespace:HillStationPOS.ViewModel"
     DispatcherUnhandledException="UnHandledException"
-    StartupUri="Windows/MainMenu/MainMenuWindow.xaml"
+    StartupUri="UserControls/ListTest.xaml"
     mc:Ignorable="d ignore">
     <!--  StartupUri="MainWindow.xaml"  -->
-
 
     <Application.Resources>
         <!--  Global View Model Locator  -->
@@ -30,5 +29,4 @@
             <Setter Property="FontSize" Value="46" />
         </Style>
     </Application.Resources>
-
 </Application>

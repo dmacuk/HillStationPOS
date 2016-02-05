@@ -21,18 +21,15 @@ namespace HillStationPOS
             Closing += (s, e) => ViewModelLocator.Cleanup();
         }
 
-        private void WindowLoaded(object sender, RoutedEventArgs e)
-        {
-            _model = (MainViewModel) DataContext;
-            _model.OrderItemAdded += OrderItemAdded;
-
-            this.LoadSettings(false);
-        }
-
         private void OrderItemAdded(object sender, OrderItemAddedEventArgs e)
         {
             OrderGrid.SelectedItem = e.OrderItemAdded;
             OrderGrid.ScrollIntoView(e.OrderItemAdded);
+        }
+
+        private void StartEdit(object sender, RoutedEventArgs e)
+        {
+            OrderGrid.BeginEdit();
         }
 
         private void WindowClosing(object sender, CancelEventArgs e)
@@ -40,9 +37,12 @@ namespace HillStationPOS
             this.SaveSettings(false);
         }
 
-        private void StartEdit(object sender, RoutedEventArgs e)
+        private void WindowLoaded(object sender, RoutedEventArgs e)
         {
-            OrderGrid.BeginEdit();
+            _model = (MainViewModel) DataContext;
+            _model.OrderItemAdded += OrderItemAdded;
+
+            this.LoadSettings(false);
         }
     }
 }

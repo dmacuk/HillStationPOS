@@ -1,4 +1,4 @@
-﻿<Window x:Class="HillStationPOS.Windows.UtilitiesMenuDialog"
+﻿<Window x:Class="HillStationPOS.Windows.Utilities.UtilitiesMenuDialog"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -9,10 +9,12 @@
         WindowStartupLocation="CenterOwner"
         Loaded="WindowLoaded"
         Closing="WindowClosing"
-        Title="Utilities" Height="300" Width="450">
+        SizeToContent="Width"
+        Title="Utilities" Height="400">
     <Border Style="{StaticResource BorderStyle}">
         <Grid>
             <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
                 <RowDefinition Height="*" />
                 <RowDefinition Height="*" />
                 <RowDefinition Height="*" />
@@ -22,18 +24,24 @@
                 Style="{StaticResource MenuButtonStyle}"
                 Command="{Binding UpdatemenuCommand}"
                 CommandParameter="{Binding ElementName=UtilitesMenu}"
-                Content="Update Menu"/>
+                Content="Update Menu" />
             <Button
                 Grid.Row="1"
                 Style="{StaticResource MenuButtonStyle}"
                 Command="{Binding ChangePasswordCommand}"
                 CommandParameter="{Binding ElementName=UtilitesMenu}"
-                Content="Change Password"/>
+                Content="Change Password" />
             <Button
                 Grid.Row="2"
                 Style="{StaticResource MenuButtonStyle}"
+                Command="{Binding MaintainCustomersCommand}"
+                CommandParameter="{Binding ElementName=UtilitesMenu}"
+                Content="Maintain Customers" />
+            <Button
+                Grid.Row="3"
+                Style="{StaticResource MenuButtonStyle}"
                 Click="ExitProgram"
-                Content="Exit"/>
+                Content="Exit" />
         </Grid>
     </Border>
 </Window>

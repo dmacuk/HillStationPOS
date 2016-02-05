@@ -9,14 +9,13 @@ namespace HillStationPOS.Model.Entities
     [ImplementPropertyChanged]
     public partial class Meal
     {
-        // NOTE: Revert meal classes before committing
-
         public delegate void MealAddedEventHandler(object sender, MealAddedEventArgs e);
+
+        // NOTE: Revert meal classes before committing
 
         public Meal()
         {
         }
-
 
         public Meal(Meal meal)
         {
@@ -33,13 +32,6 @@ namespace HillStationPOS.Model.Entities
             DisplayOrder = meal.DisplayOrder;
         }
 
-        public Visibility PriceVisible => Price == 0 ? Visibility.Hidden : Visibility.Visible;
-        public Visibility ChickenVisible => ChickenPrice == 0 ? Visibility.Hidden : Visibility.Visible;
-        public Visibility LambVisible => LambPrice == 0 ? Visibility.Hidden : Visibility.Visible;
-        public Visibility VegetableVisible => VegetablePrice == 0 ? Visibility.Hidden : Visibility.Visible;
-        public Visibility PrawnVisible => PrawnPrice == 0 ? Visibility.Hidden : Visibility.Visible;
-        public Visibility KingPrawnVisible => KingPrawnPrice == 0 ? Visibility.Hidden : Visibility.Visible;
-
         public ICommand AddMeal
         {
             get
@@ -52,11 +44,48 @@ namespace HillStationPOS.Model.Entities
             }
         }
 
+        public Visibility ChickenVisible => ChickenPrice == 0 ? Visibility.Hidden : Visibility.Visible;
+        public Visibility KingPrawnVisible => KingPrawnPrice == 0 ? Visibility.Hidden : Visibility.Visible;
+        public Visibility LambVisible => LambPrice == 0 ? Visibility.Hidden : Visibility.Visible;
+        public Visibility PrawnVisible => PrawnPrice == 0 ? Visibility.Hidden : Visibility.Visible;
+        public Visibility PriceVisible => Price == 0 ? Visibility.Hidden : Visibility.Visible;
+        public Visibility VegetableVisible => VegetablePrice == 0 ? Visibility.Hidden : Visibility.Visible;
+
         public event MealAddedEventHandler MealAdded;
 
-        private void OnMealAdded(MealAddedEventArgs e)
+        public string GetDescripion(MealType mealType)
         {
-            MealAdded?.Invoke(this, e);
+            string prefix;
+            switch (mealType)
+            {
+                case MealType.Price:
+                    prefix = string.Empty;
+                    break;
+
+                case MealType.Chicken:
+                    prefix = "Chicken ";
+                    break;
+
+                case MealType.Lamb:
+                    prefix = "Lamb ";
+                    break;
+
+                case MealType.Vegetable:
+                    prefix = "Veg. ";
+                    break;
+
+                case MealType.Prawn:
+                    prefix = "Prawn ";
+                    break;
+
+                case MealType.KingPrawn:
+                    prefix = "King Prawn ";
+                    break;
+
+                default:
+                    throw new ArgumentOutOfRangeException();
+            }
+            return prefix + Title;
         }
 
         public decimal GetPrice(MealType mealType)
@@ -94,46 +123,11 @@ namespace HillStationPOS.Model.Entities
             return price;
         }
 
-        public string GetDescripion(MealType mealType)
+        private void OnMealAdded(MealAddedEventArgs e)
         {
-            string prefix;
-            switch (mealType)
-            {
-                case MealType.Price:
-                    prefix = string.Empty;
-                    break;
-
-                case MealType.Chicken:
-                    prefix = "Chicken ";
-                    break;
-
-                case MealType.Lamb:
-                    prefix = "Lamb ";
-                    break;
-
-                case MealType.Vegetable:
-                    prefix = "Veg. ";
-                    break;
-
-                case MealType.Prawn:
-                    prefix = "Prawn ";
-                    break;
-
-                case MealType.KingPrawn:
-                    prefix = "King Prawn ";
-                    break;
-
-                default:
-                    throw new ArgumentOutOfRangeException();
-            }
-            return prefix + Title;
+            MealAdded?.Invoke(this, e);
         }
     }
-}
-
-public class MealAddedEventArgs : EventArgs
-{
-    public MealType MealType { get; set; }
 }
 
 public enum MealType
@@ -144,4 +138,9 @@ public enum MealType
     Vegetable,
     Prawn,
     KingPrawn
+}
+
+public class MealAddedEventArgs : EventArgs
+{
+    public MealType MealType { get; set; }
 }

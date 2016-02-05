@@ -1,21 +1,22 @@
-﻿using System.Diagnostics.CodeAnalysis;
-using System.Windows;
-using HillStationPOS.Interfaces;
+﻿using HillStationPOS.Interfaces;
 using HillStationPOS.Utilities;
 using HillStationPOS.Windows;
 using HillStationPOS.Windows.ChangePassword;
+using HillStationPOS.Windows.MaintainCustomers;
 using HillStationPOS.Windows.Password;
+using System.Diagnostics.CodeAnalysis;
+using System.Windows;
+using UtilitiesMenuDialog = HillStationPOS.Windows.Utilities.UtilitiesMenuDialog;
 
 namespace HillStationPOS.Services
 {
     [SuppressMessage("ReSharper", "ClassNeverInstantiated.Global")]
     internal class WindowService : IWindowService
     {
-        public bool ModifyMenu()
+        public void ChangePassword(Window owner)
         {
-            var dlg = new MenuMaintenanceWindow();
+            var dlg = new ChangePasswordDialog { Owner = owner };
             dlg.ShowDialog();
-            return dlg.ReloadData;
         }
 
         public bool GetPassword(Window owner)
@@ -23,7 +24,7 @@ namespace HillStationPOS.Services
             var password = PasswordUtilities.GetPassword();
             while (true)
             {
-                var dlg = new PasswordDialog {Owner = owner};
+                var dlg = new PasswordDialog { Owner = owner };
                 if (dlg.ShowDialog() == true)
                 {
                     var response = dlg.Response;
@@ -36,15 +37,22 @@ namespace HillStationPOS.Services
             }
         }
 
-        public void ShowUtilitiesMenu(Window window)
+        public void MaintainCustomers(Window owner)
         {
-            var dlg = new UtilitiesMenuDialog {Owner = window};
+            var dlg = new MaintainCustomersDialog { Owner = owner };
             dlg.ShowDialog();
         }
 
-        public void ChangePassword(Window owner)
+        public bool ModifyMenu()
         {
-            var dlg = new ChangePasswordDialog {Owner = owner};
+            var dlg = new MenuMaintenanceWindow();
+            dlg.ShowDialog();
+            return dlg.ReloadData;
+        }
+
+        public void ShowUtilitiesMenu(Window window)
+        {
+            var dlg = new UtilitiesMenuDialog { Owner = window };
             dlg.ShowDialog();
         }
     }

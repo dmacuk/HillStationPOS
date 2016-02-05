@@ -1,7 +1,6 @@
 ﻿using System.ComponentModel;
 using System.Windows;
 using System.Windows.Controls;
-using HillStationPOS.Services;
 using HillStationPOS.ViewModel;
 using Utils.Window;
 using Utils.Window.Utils;
@@ -24,21 +23,20 @@ namespace HillStationPOS.Windows.MainMenu
             Close();
         }
 
-        private async void WindowLoaded(object sender, RoutedEventArgs e)
-        {
-            this.LoadSettings(false);
-            var loaded = await DataService.Instance.Initialise();
-            var buttons = Shared.GetChildren<Button>(this);
-            foreach (var button in buttons)
-            {
-                button.IsEnabled = loaded;
-            }
-            TxtStatus.Visibility = Visibility.Collapsed;
-        }
-
         private void WindowClosing(object sender, CancelEventArgs e)
         {
             this.SaveSettings(false);
+        }
+
+        private void WindowLoaded(object sender, RoutedEventArgs e)
+        {
+            this.LoadSettings(false);
+            var buttons = Shared.GetChildren<Button>(this);
+            foreach (var button in buttons)
+            {
+                button.IsEnabled = true;
+            }
+            TxtStatus.Visibility = Visibility.Collapsed;
         }
     }
 }
